@@ -30,7 +30,7 @@ public class CannonGame extends Game implements Serializable{
 
 	// internal representation of the game state
 	// TODO: insert additional game data here (vermutlich: members)
-	private Player currPlayer; // wer grade dran ist
+	//private Player currPlayer; // wer grade dran ist /// ist bereits im nextPlayer gespeichert
 	// Sachen zum Parsen: 
 	
 	/************************
@@ -207,7 +207,9 @@ public class CannonGame extends Game implements Serializable{
 	@Override
 	public void setBoard(String state) {
 		
-		if this.tryMove(state, )
+		if (this.tryMove(state, this.nextPlayer) == true) {
+			
+		}
 		//TODO: implement
 	}
 	
