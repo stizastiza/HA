@@ -29,9 +29,11 @@ public class CannonGame extends Game implements Serializable{
 	private Player whitePlayer;
 
 	// internal representation of the game state
-	// TODO: insert additional game data here (vermutlich: members)
-	//private Player currPlayer; // wer grade dran ist /// ist bereits im nextPlayer gespeichert
-	// Sachen zum Parsen: 
+	// TODO: insert additional game data here
+	// should it be private?
+	private String CurrGameState;
+	public String StartState = "/1w1w1w1w1w/1w1w1w1w1w/1w1w1w1w1w///b1b1b1b1b1/b1b1b1b1b1/b1b1b1b1b1/";
+	
 	
 	/************************
 	 * constructors
@@ -39,8 +41,11 @@ public class CannonGame extends Game implements Serializable{
 	
 	public CannonGame() {
 		super();
-		
 		// TODO: add further initializations if necessary
+		// logic: i use a constructor, when i create a new object of class CannonGame
+		// => when i create a game, i set CurrGameState to the start-Position
+		this.started = true;
+		this.CurrGameState = this.StartState;
 		
 	}
 	
@@ -204,20 +209,19 @@ public class CannonGame extends Game implements Serializable{
 	 * !!!!!!!!! To be implemented !!!!!!!!!!!!
 	 ******************************************/
 	
+	/**
+	 *	@param: state is a FEN-String of new state of the board
+	 *  Change a board state to FEN. 
+	 */
 	@Override
 	public void setBoard(String state) {
-		
-		if (this.tryMove(state, this.nextPlayer) == true) {
-			
-		}
 		//TODO: implement
+		
 	}
 	
 	@Override
 	public String getBoard() {
-
-		//TODO: replace with real implementation
-		return "";
+		return this.CurrGameState;
 	}
 	
 	@Override
@@ -233,6 +237,8 @@ public class CannonGame extends Game implements Serializable{
 		//
 		
 		String CurrState = this.getBoard();
+		
+		// set board wird hier angewendet
 		
 		
 		return true;
