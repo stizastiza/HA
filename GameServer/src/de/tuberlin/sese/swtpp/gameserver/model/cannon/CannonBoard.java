@@ -8,9 +8,9 @@ import java.util.Map;
 
 public class CannonBoard implements Serializable {
 	// Board notation: 
-	final int[] numbers = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
-	final char[] letters = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'};
-	Map<Character, Integer> letter;
+	final int[] digits = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+	final char[] signs = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'};
+	Map<Character, Integer> signMap;
 	
 	// FEN-Notation, piece to move now:
 	String currentMove;
@@ -28,20 +28,21 @@ public class CannonBoard implements Serializable {
 	
 	public CannonBoard() {
 		//TODO: i don't need a constructor - it could be shorter here
-		//TODO: move constructor code to class declarations and members
+		//TODO: move constructor code to class declarations and members, because constructor is also a method
+		//TODO: and it`s count of lines is also limited
 		this.pieces = new LinkedList<BoardPiece>();
 		
-		this.letter = new HashMap<Character, Integer>();
-		this.letter.put('a', 0);
-		this.letter.put('b', 1);
-		this.letter.put('c', 2);
-		this.letter.put('d', 3);
-		this.letter.put('e', 4);
-		this.letter.put('f', 5);
-		this.letter.put('g', 6);
-		this.letter.put('h', 7);
-		this.letter.put('i', 8);
-		this.letter.put('j', 9);
+		this.signMap = new HashMap<Character, Integer>();
+		this.signMap.put('a', 0);
+		this.signMap.put('b', 1);
+		this.signMap.put('c', 2);
+		this.signMap.put('d', 3);
+		this.signMap.put('e', 4);
+		this.signMap.put('f', 5);
+		this.signMap.put('g', 6);
+		this.signMap.put('h', 7);
+		this.signMap.put('i', 8);
+		this.signMap.put('j', 9);
 		
 		this.squares = new HashMap<Character, BoardSquare[]>();
 		// TODO: make shorter with for (each)
@@ -62,6 +63,35 @@ public class CannonBoard implements Serializable {
 			}
 		}
 	}
+	
+	
+	//Create piece objects and place them to their positions
+	public void addPiece(String name, String color, char x, int y) {
+		BoardPiece newPiece = new BoardPiece(name, color);
+		newPiece.square = this.squares.get(x)[y];
+		this.pieces.add(newPiece);
+		this.squares.get(x)[y].piece = newPiece;
+	}
+	
+	// public List<Integer> getPiece(String name, String color, char x, int y) {}
+	
+	// switchMove() does the same as updateNext()
+	
+	// MOVE FUNCTION (!not limited!):
+	public void makeMove(char fromX, int fromY, char toX, int toY, boolean capture) {
+		
+		BoardPiece previousPiece = this.squares.get(fromX)[fromY].piece;
+		previousPiece.square = this.squares.get(toX)[toY];
+		
+		if(capture && this.squares.get(toX)[toY].piece != null) {
+			this.squares.get(toX)[toY].piece.square = null;
+		}
+		
+		this.squares.get(toX)[toY].piece = previousPiece;
+		this.squares.get(fromX)[fromY].piece = null;
+		
+	}
+	
 	
 	
 	

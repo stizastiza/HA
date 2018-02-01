@@ -30,8 +30,6 @@ public class CannonGame extends Game implements Serializable{
 
 	// internal representation of the game state
 	// TODO: insert additional game data here
-	// should it be private?
-	//private String CurrGameState;
 	//public String StartState = "/1w1w1w1w1w/1w1w1w1w1w/1w1w1w1w1w///b1b1b1b1b1/b1b1b1b1b1/b1b1b1b1b1/";
 	public CannonBoard Board;
 	
