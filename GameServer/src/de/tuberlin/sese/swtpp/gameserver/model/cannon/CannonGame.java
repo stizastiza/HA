@@ -33,7 +33,7 @@ public class CannonGame extends Game implements Serializable{
 	// should it be private?
 	//private String CurrGameState;
 	//public String StartState = "/1w1w1w1w1w/1w1w1w1w1w/1w1w1w1w1w///b1b1b1b1b1/b1b1b1b1b1/b1b1b1b1b1/";
-	this.
+	public CannonBoard Board;
 	
 	/************************
 	 * constructors
@@ -42,10 +42,9 @@ public class CannonGame extends Game implements Serializable{
 	public CannonGame() {
 		super();
 		// TODO: add further initializations if necessary
-		// logic: i use a constructor, when i create a new object of class CannonGame
-		// => when i create a game, i set CurrGameState to the start-Position
 		this.started = true;
-		this.CurrGameState = this.StartState;
+		this.Board = new CannonBoard();
+		
 		
 	}
 	

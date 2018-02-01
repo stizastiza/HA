@@ -14,6 +14,7 @@ public class CannonBoard implements Serializable {
 	
 	// FEN-Notation, piece to move now:
 	String currentMove;
+	// String currentState?
 	// possible moves:
 	//TODO: ADD SPECIALITIES
 	// Pieces (Spielsteine) of the board:
@@ -26,6 +27,8 @@ public class CannonBoard implements Serializable {
 	 */
 	
 	public CannonBoard() {
+		//TODO: i don't need a constructor - it could be shorter here
+		//TODO: move constructor code to class declarations and members
 		this.pieces = new LinkedList<BoardPiece>();
 		
 		this.letter = new HashMap<Character, Integer>();
@@ -41,9 +44,25 @@ public class CannonBoard implements Serializable {
 		this.letter.put('j', 9);
 		
 		this.squares = new HashMap<Character, BoardSquare[]>();
-		this.squares.put('a', );
-		
-		
+		// TODO: make shorter with for (each)
+		this.squares.put('a', new BoardSquare[10]);
+		this.squares.put('b', new BoardSquare[10]);
+		this.squares.put('c', new BoardSquare[10]);
+		this.squares.put('d', new BoardSquare[10]);
+		this.squares.put('e', new BoardSquare[10]);
+		this.squares.put('f', new BoardSquare[10]);
+		this.squares.put('g', new BoardSquare[10]);
+		this.squares.put('h', new BoardSquare[10]);
+		this.squares.put('i', new BoardSquare[10]);
+		this.squares.put('j', new BoardSquare[10]);
+		// fill fileds: for example [a][0..9]
+		for (char keyVar: this.squares.keySet()) {
+			for (int j=0; j<=9; j++) {
+				this.squares.get(keyVar)[j] = new BoardSquare(keyVar, j);
+			}
+		}
 	}
+	
+	
 	
 }
