@@ -67,7 +67,7 @@ public class CannonBoard implements Serializable {
 	
 	
 	//Create piece objects and place them to their positions
-	public void addPiece(String name, char x, int y) {
+	public void addPiece(char name, char x, int y) {
 		BoardPiece newPiece = new BoardPiece(name);
 		newPiece.square = this.squares.get(x)[y];
 		this.pieces.add(newPiece);
@@ -95,7 +95,7 @@ public class CannonBoard implements Serializable {
 	}
 	
 	/**
-	 * @return current board state as a FEN-String
+	 * @return current board state as a FEN-String. Parser-Preparation for getBoard function.
 	 */
 	public String boardFEN() {
 		String FEN = "";
@@ -107,7 +107,7 @@ public class CannonBoard implements Serializable {
 						FEN += emptyCounter;
 						emptyCounter = 0;
 					}
-					String pieceName = this.squares.get(keyVar)[num].piece.name;
+					char pieceName = this.squares.get(keyVar)[num].piece.name;
 					FEN += pieceName;
 				}
 				else {
@@ -126,8 +126,18 @@ public class CannonBoard implements Serializable {
 		return FEN;
 	}
 	
-	
-	
+	/**
+	 * load another FEN string into the game board. Parser-Preparation for setBoard function.
+	 */
+	public void loadFEN(String FEN) {
+		// Annuliere das Spielfeld: TODO: eine extra void Methode dafuer schreiben.
+		for (char keyVar: this.squares.keySet()) {
+			for (int j=0; j<=9; j++) {
+				this.squares.get(keyVar)[j].piece = null;
+			}
+		}
+		this.pieces = new LinkedList<BoardPiece>();
+	}
 	
 	
 	

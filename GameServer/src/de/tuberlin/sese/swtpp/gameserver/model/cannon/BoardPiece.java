@@ -3,10 +3,10 @@ package de.tuberlin.sese.swtpp.gameserver.model.cannon;
 import java.io.Serializable;
 
 public class BoardPiece implements Serializable {
-	String name; // 'b' 'w'
+	char name; // 'b' 'w'
 	BoardSquare square;
 	
-	public BoardPiece(String name) {
+	public BoardPiece(char name) {
 		this.name = name; 
 	}
 	
