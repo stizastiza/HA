@@ -90,8 +90,29 @@ public class CannonBoard implements Serializable {
 		this.squares.get(toX)[toY].piece = previousPiece;
 		this.squares.get(fromX)[fromY].piece = null;
 		
+		
 	}
 	
+	/**
+	 * @return current board state as a FEN-String
+	 */
+	public String boardFEN() {
+		String FEN = "";
+		for (int num=9; num>=0; num--) {
+			int emptyCounter = 0;
+			for (char keyVar: this.squares.keySet()) {
+				if(this.squares.get(keyVar)[num].piece != null) {
+					if(emptyCounter != 0) {
+						FEN += emptyCounter;
+						emptyCounter = 0;
+					}
+					String pieceName = this.squares.get(keyVar)[num].piece.name;
+					String pieceColor = this.squares.get(keyVar)[num].piece.color;
+			}
+		}
+		
+		return FEN;
+	}
 	
 	
 	
