@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 public class CannonBoard implements Serializable {
+	private static final long serialVersionUID = 5424778147226994452L;
 	// Board notation: 
 	final int[] digits = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
 	final char[] signs = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'};
@@ -67,7 +68,7 @@ public class CannonBoard implements Serializable {
 	
 	//Create piece objects and place them to their positions
 	public void addPiece(String name, String color, char x, int y) {
-		BoardPiece newPiece = new BoardPiece(name, color);
+		BoardPiece newPiece = new BoardPiece(name);
 		newPiece.square = this.squares.get(x)[y];
 		this.pieces.add(newPiece);
 		this.squares.get(x)[y].piece = newPiece;
@@ -107,7 +108,18 @@ public class CannonBoard implements Serializable {
 						emptyCounter = 0;
 					}
 					String pieceName = this.squares.get(keyVar)[num].piece.name;
-					String pieceColor = this.squares.get(keyVar)[num].piece.color;
+					FEN += pieceName;
+				}
+				else {
+					emptyCounter++;
+				}	
+			}
+			while (emptyCounter != 0) {
+				FEN += 1;
+				emptyCounter--;
+			}
+			if (num != 0) {
+				FEN += '/';
 			}
 		}
 		

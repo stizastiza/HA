@@ -4,12 +4,10 @@ import java.io.Serializable;
 
 public class BoardPiece implements Serializable {
 	String name; // 'b' 'w'
-	String color; // aus dem Namen wissen wir, um welche Farbe es geht!
 	BoardSquare square;
 	
-	public BoardPiece(String name, String color) {
+	public BoardPiece(String name) {
 		this.name = name; 
-		this.color = color; 
 	}
 	
 }
