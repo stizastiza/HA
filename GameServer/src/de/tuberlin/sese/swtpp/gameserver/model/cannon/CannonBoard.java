@@ -137,6 +137,8 @@ public class CannonBoard implements Serializable {
 			}
 		}
 		this.pieces = new LinkedList<BoardPiece>();
+		
+		String[] FENArray = FEN.split(" ");
 	}
 	
 	
