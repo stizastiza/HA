@@ -13,8 +13,8 @@ public class CannonBoard implements Serializable {
 	final char[] signs = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'};
 	Map<Character, Integer> signMap;
 	
-	// FEN-Notation, piece to move now:
-	String currentMove;
+	// 'w' or 'b' - Zeigt wer dran ist (wird am Ende des FEN-Strings hinzugefuegt)
+	char currentMove;
 	// String currentState?
 	// possible moves:
 	//TODO: ADD SPECIALITIES
@@ -67,7 +67,7 @@ public class CannonBoard implements Serializable {
 	
 	
 	//Create piece objects and place them to their positions
-	public void addPiece(String name, String color, char x, int y) {
+	public void addPiece(String name, char x, int y) {
 		BoardPiece newPiece = new BoardPiece(name);
 		newPiece.square = this.squares.get(x)[y];
 		this.pieces.add(newPiece);
@@ -122,9 +122,14 @@ public class CannonBoard implements Serializable {
 				FEN += '/';
 			}
 		}
-		
+		FEN += " "+this.currentMove;
 		return FEN;
 	}
+	
+	
+	
+	
+	
 	
 	
 	
