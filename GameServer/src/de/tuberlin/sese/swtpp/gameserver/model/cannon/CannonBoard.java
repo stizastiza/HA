@@ -134,17 +134,18 @@ public class CannonBoard implements Serializable {
 		String[] FENArray = FEN.split(" ");
 		String[] boardArray = FENArray[0].split("/");
 		for (int lines = 0; lines <= 9; lines++) {
-			String line = boardArray[lines]; // (1) for example: 1111111111 or 1w1w1w1w1w
+			// TODO: take a look if i should mirror a line (i take here from the first line before slash,
+			// TODO: but the first line after slash is actually a tenth line
+			String line = boardArray[lines];
 			int colsY = 0;
+			// TODO: if line.lentgh = 0
 			for (int cols=1; cols<=line.length(); cols++) {
 				char letter = line.charAt(cols-1); // for example (1): cols = 2, letter = 1 or w.
-				// if letter is a digit: (doesn`t mathes to combination of possible letters)
-				// TODO: vermutlich, funktioniert es mit mit den leeren lines nicht (Uberpruefen!)
+				// if letter is a digit:
 				if (!(""+letter).matches("[wWbB]")) {
 					colsY = colsY + Integer.parseInt(""+letter);
 					continue;
 				}
-				
 				char name = letter == 'w' ? 'w' : letter == 'W' ? 'W' : letter == 'b' ? 'b' : letter == 'B' ? 'B' : null;
 				char x = this.signs[colsY];
 				int y = this.digits[lines];
@@ -170,6 +171,8 @@ public class CannonBoard implements Serializable {
 		}
 		this.pieces = new LinkedList<BoardPiece>();
 	}
+	
+	
 	
 	
 	
