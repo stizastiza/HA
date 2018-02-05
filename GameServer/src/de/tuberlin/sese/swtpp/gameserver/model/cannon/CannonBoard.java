@@ -130,17 +130,46 @@ public class CannonBoard implements Serializable {
 	 * load another FEN string into the game board. Parser-Preparation for setBoard function.
 	 */
 	public void loadFEN(String FEN) {
-		// Annuliere das Spielfeld: TODO: eine extra void Methode dafuer schreiben.
+		this.setBoardFree();
+		String[] FENArray = FEN.split(" ");
+		String[] boardArray = FENArray[0].split("/");
+		for (int lines = 0; lines <= 9; lines++) {
+			String line = boardArray[lines]; // (1) for example: 1111111111 or 1w1w1w1w1w
+			int colsY = 0;
+			for (int cols=1; cols<=line.length(); cols++) {
+				char letter = line.charAt(cols-1); // for example (1): cols = 2, letter = 1 or w.
+				// if letter is a digit: (doesn`t mathes to combination of possible letters)
+				// TODO: vermutlich, funktioniert es mit mit den leeren lines nicht (Uberpruefen!)
+				if (!(""+letter).matches("[wWbB]")) {
+					colsY = colsY + Integer.parseInt(""+letter);
+					continue;
+				}
+				
+				char name = letter == 'w' ? 'w' : letter == 'W' ? 'W' : letter == 'b' ? 'b' : letter == 'B' ? 'B' : null;
+				char x = this.signs[colsY];
+				int y = this.digits[lines];
+				this.addPiece(name, x, y);
+				colsY++;
+			}
+		}
+		if (FENArray[1].equals("b")) {
+			this.currentMove = 'b';
+		} else {
+			this.currentMove = 'w';
+		}
+	}
+	
+	/**
+	 * Set game board free:
+	 */
+	public void setBoardFree() {
 		for (char keyVar: this.squares.keySet()) {
 			for (int j=0; j<=9; j++) {
 				this.squares.get(keyVar)[j].piece = null;
 			}
 		}
 		this.pieces = new LinkedList<BoardPiece>();
-		
-		String[] FENArray = FEN.split(" ");
 	}
-	
 	
 	
 	
