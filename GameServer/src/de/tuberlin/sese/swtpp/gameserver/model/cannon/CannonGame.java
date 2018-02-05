@@ -212,13 +212,12 @@ public class CannonGame extends Game implements Serializable{
 	 */
 	@Override
 	public void setBoard(String state) {
-		//TODO: implement
-		
+		this.Board.loadFEN(state);
 	}
 	
 	@Override
 	public String getBoard() {
-		return this.CurrGameState;
+		return this.Board.boardFEN();
 	}
 	
 	@Override
