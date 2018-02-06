@@ -15,7 +15,7 @@ public class CannonGame extends Game implements Serializable{
 
 
 	/**
-	 * 
+	 * TODO: was bedeutet serialVersionUID ???
 	 */
 	private static final long serialVersionUID = 5424778147226994452L;
 	
@@ -31,6 +31,7 @@ public class CannonGame extends Game implements Serializable{
 	// internal representation of the game state
 	// TODO: insert additional game data here
 	public CannonBoard Board;
+	public Rules rules;
 	
 	/************************
 	 * constructors
@@ -41,7 +42,7 @@ public class CannonGame extends Game implements Serializable{
 		// TODO: add further initializations if necessary
 		this.started = true;
 		this.Board = new CannonBoard();
-		
+		this.rules = new Rules();
 		
 	}
 	
@@ -221,6 +222,9 @@ public class CannonGame extends Game implements Serializable{
 	
 	@Override
 	public boolean tryMove(String moveString, Player player) {
+		// (0) liegt movestring innerhalb des Spielfeldes?
+		boolean result0 = this.Board.squares.containsKey(key) && this.Board.squares.containsValue(value) ? true : false;
+		
 		//TODO: implement
 		// wir vergleichen den string aus getBoard() mit dem moveString und
 		// bekommen einen Schrittfall

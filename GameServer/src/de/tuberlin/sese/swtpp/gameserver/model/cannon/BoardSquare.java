@@ -3,6 +3,7 @@ package de.tuberlin.sese.swtpp.gameserver.model.cannon;
 import java.io.Serializable;
 
 public class BoardSquare implements Serializable {
+	private static final long serialVersionUID = 5424778147226994452L;
 	char x;
 	int y;
 	BoardPiece piece;
