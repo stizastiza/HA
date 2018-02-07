@@ -220,10 +220,27 @@ public class CannonGame extends Game implements Serializable{
 		return this.Board.boardFEN();
 	}
 	
+	
+	/**
+	 * This method checks if the supplied move is possible to perform 
+	 * in the current game state/status and, if so, does it.
+	 * The following has to be checked/might be changed:
+	 * - it has to be checked if the move can be performed
+	 * ---- it is a valid move
+	 * ---- it is done by the right player
+	 * ---- there is no other move that the player is forced to perform
+	 * - if the move can be performed, the following has to be done:
+	 * ---- the board state has to be updated (e.g. figures moved/deleted)
+	 * ---- the board status has to be updated (check if game is finished)
+	 * ---- the next player has to be set (if move is over, it's next player's turn)
+	 * ---- history is updated
+	 * 
+	 * @param move String representation of move
+	 * @param player The player that tries the move
+	 * @return true if the move was performed
+	 */
 	@Override
 	public boolean tryMove(String moveString, Player player) {
-		// (0) liegt movestring innerhalb des Spielfeldes?
-		boolean result0 = this.Board.squares.containsKey(key) && this.Board.squares.containsValue(value) ? true : false;
 		// DO I HAVE ANY LEGAL MOVES?
 		//TODO: implement
 		// wir vergleichen den string aus getBoard() mit dem moveString und
