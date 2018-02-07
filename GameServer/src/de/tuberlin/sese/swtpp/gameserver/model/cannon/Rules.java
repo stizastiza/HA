@@ -27,6 +27,9 @@ public class Rules implements Serializable {
 	
 	public BoardSquare Soldier(CannonBoard board, char fromX, int fromY, char toX, int toY) {
 		BoardSquare result = null;
+		if (!this.isSoldier(board, fromX, fromY) && !this.SoldierCanMove(board, fromX, fromY, toX, toY)) {
+			return null;
+		}
 		List<BoardPiece> legalSoldiers = new LinkedList<BoardPiece>();
 		int toXnum = letter.get(toX); // TODO: to short: ubergebe sofort einen int
 		BoardPiece Soldier;

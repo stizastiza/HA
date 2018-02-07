@@ -224,7 +224,7 @@ public class CannonGame extends Game implements Serializable{
 	public boolean tryMove(String moveString, Player player) {
 		// (0) liegt movestring innerhalb des Spielfeldes?
 		boolean result0 = this.Board.squares.containsKey(key) && this.Board.squares.containsValue(value) ? true : false;
-		
+		// DO I HAVE ANY LEGAL MOVES?
 		//TODO: implement
 		// wir vergleichen den string aus getBoard() mit dem moveString und
 		// bekommen einen Schrittfall
