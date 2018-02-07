@@ -93,6 +93,14 @@ public class Rules implements Serializable {
 	public boolean SoldierRetreats() {
 		return false;
 	}
+	// TODO: Die Methode erstellt einen Map von moglichen Moves von allen Figuren auf dem Spielbrett.
+	public Map<BoardPiece, BoardSquare[]> getLegalMoves(CannonBoard board) {
+		Map<BoardPiece, BoardSquare[]> result = new HashMap<BoardPiece, BoardSquare[]>();
+		for (BoardPiece Figure: board.pieces) {
+			this.addMoves(result);
+		}
+		return null; 
+	}
 	
 	public boolean isCannone() {
 		return false;
