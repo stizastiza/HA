@@ -39,10 +39,11 @@ public class Rules implements Serializable {
 				return false;
 			}
 			return true;
+		} else {
+			boolean m = this.parseMSoldier(board, moveString);
+			boolean result = m == false ? false : this.SoldierCanMove(board, this.fromX, this.fromY, this.toX, this.toY) ? true : false;
+			return result;
 		}
-		boolean m = this.parseMSoldier(board, moveString);
-		boolean result = m == false ? false : m == true ? (this.SoldierCanMove(board, this.fromX, this.fromY, this.toX, this.toY) ? true : false) : false;
-		return result;	
 	}
 	public boolean parseCity(CannonBoard board ,String moveString){
 		if (moveString.length() != 5) {
@@ -66,14 +67,15 @@ public class Rules implements Serializable {
 		}
 		char [] Positions = new char[5];
 		moveString.getChars(0, moveString.length(), Positions, 0);
-		//TODO: if Bedingung korrekt schreiben (es soll zuerst gepruft werden, ob die Positionen auf dem Feld liegen) + noch eine Bedingung:
-		//TODO: ob der richtige Spieler die Figur bewegt, sondern auch die Figur die bewegt wird der Farbe von dem Spieler entspricht: 
-		//TODO: Positions[2] soll ein Strich - sein!
-		if ((this.isSoldier(board, Positions[0], Character.getNumericValue(Positions[1])) == false || this.isCity(board, Positions[0], Character.getNumericValue(Positions[1])) == false) && 
-			!this.contains(board.signs, Positions[3]) && !this.contains(board.digits, Character.getNumericValue(Positions[4]))) {
+		if (Positions[2] != '-') {
 			return false;
 		}
-		if 
+		if (board.currentMove == 'w' && (!this.isSoldier(board, Positions[0], Character.getNumericValue(Positions[1])) || board.squares.get(Positions[0])[Character.getNumericValue(Positions[1])].piece.name != 'w') ) {
+			return false;
+		}
+		if (board.currentMove == 'b' && (!this.isSoldier(board, Positions[0], Character.getNumericValue(Positions[1])) || board.squares.get(Positions[0])[Character.getNumericValue(Positions[1])].piece.name != 'b')  ) {
+			return false;
+		}
 		this.fromX = Positions[0];
 		this.fromY = Positions[1];
 		this.toX = Positions[3];
