@@ -12,4 +12,11 @@ public class BoardSquare implements Serializable {
 		this.x = x;
 		this.y = y;
 	}
+	
+	public boolean Equals(char x, int y) {
+		if (this.x == x && this.y == y) {
+			return true;
+		}
+		return false;
+	}
 }

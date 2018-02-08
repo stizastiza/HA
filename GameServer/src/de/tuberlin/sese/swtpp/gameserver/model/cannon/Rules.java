@@ -33,53 +33,52 @@ public class Rules implements Serializable {
 	 * @param moveString
 	 * @return true/false
 	 */
-	public boolean MoveParser(CannonBoard board, String moveString) {
-		// liegt moveString innerhalb des moglichen Bereiches, + isSoldier + isCity
-		if (!this.parseMString(board, moveString)) {
+	public boolean MoveParser(CannonBoard board, String moveString, int MoveCount) {
+		if (MoveCount < 2) {
+			if (!parseCity(board, moveString)) {
+				return false;
+			}
+			return true;
+		}
+		boolean m = this.parseMSoldier(board, moveString);
+		boolean result = m == false ? false : m == true ? (this.SoldierCanMove(board, this.fromX, this.fromY, this.toX, this.toY) ? true : false) : false;
+		return result;	
+	}
+	public boolean parseCity(CannonBoard board ,String moveString){
+		if (moveString.length() != 5) {
 			return false;
 		}
-		
-		
-		return true;	
-	}
-	
-	public BoardSquare Soldier(CannonBoard board, char fromX, int fromY, char toX, int toY) {
-		BoardSquare result = null;
-		if (!this.isSoldier(board, fromX, fromY) && !this.SoldierCanMove(board, fromX, fromY, toX, toY)) {
-			return null;
-		}
-		List<BoardPiece> legalSoldiers = new LinkedList<BoardPiece>();
-		int toXnum = letter.get(toX); // TODO: to short: ubergebe sofort einen int
-		BoardPiece Soldier;
-		int soldierX, soldierY;
-		int mod = board.currentMove == 'w' ? 1 : -1;
-		List<Integer> Soldiers = board.getPiece(board.currentMove, fromX, -1);
-		for (int i = 0; i<Soldiers.size(); i++) {
-			Soldier = board.pieces.get(Soldiers.get(i));
-			soldierX = letter.get(Soldier.square.x);
-			soldierY = Soldier.square.y;
-			// Check if soldier could move to the given square	
-		}
-		return result;
-	}
-	public boolean soldierMoves(CannonBoard board, String moveString) {
-		// parseMString checks, if (1) it`s a soldier, (2) squares exist
-		// and also sets all location members of the class:
-		if (!this.parseMString(board ,moveString)) {
+		char [] Positions = new char[5];
+		moveString.getChars(0, moveString.length(), Positions, 0);
+		BoardSquare Position1 = new BoardSquare(Positions[0], Character.getNumericValue(Positions[1]));
+		BoardSquare Position2 = new BoardSquare(Positions[3], Character.getNumericValue(Positions[4]));
+		if (board.currentMove == 'w' && (!Position1.Equals(Position2.x, Position2.y) || !(letter.get(Position1.x) > 0) || !(letter.get(Position1.x) < 9) || Position1.y != 9)) {
 			return false;
 		}
-		// can a soldier move? 
-		if (!this.SoldierCanMove(board, this.fromX, this.fromY, this.toX, this.toY)) {
+		if (board.currentMove == 'b' && (!Position1.Equals(Position2.x, Position2.y) || !(letter.get(Position1.x) > 0) || !(letter.get(Position1.x) < 9) || Position1.y != 0)) {
 			return false;
 		}
 		return true;
 	}
-	
-	public BoardPiece City(CannonBoard board, char fromX, int fromY, char toX, int toY) {
-		BoardPiece result = null;
-		
-		
-		return result;
+	public boolean parseMSoldier(CannonBoard board ,String moveString) {
+		if (moveString.length() != 5) {
+			return false;
+		}
+		char [] Positions = new char[5];
+		moveString.getChars(0, moveString.length(), Positions, 0);
+		//TODO: if Bedingung korrekt schreiben (es soll zuerst gepruft werden, ob die Positionen auf dem Feld liegen) + noch eine Bedingung:
+		//TODO: ob der richtige Spieler die Figur bewegt, sondern auch die Figur die bewegt wird der Farbe von dem Spieler entspricht: 
+		//TODO: Positions[2] soll ein Strich - sein!
+		if ((this.isSoldier(board, Positions[0], Character.getNumericValue(Positions[1])) == false || this.isCity(board, Positions[0], Character.getNumericValue(Positions[1])) == false) && 
+			!this.contains(board.signs, Positions[3]) && !this.contains(board.digits, Character.getNumericValue(Positions[4]))) {
+			return false;
+		}
+		if 
+		this.fromX = Positions[0];
+		this.fromY = Positions[1];
+		this.toX = Positions[3];
+		this.toY = Positions[4];
+		return true;
 	}
 	
 	public boolean Capture(CannonBoard board, char toX, int toY) {
@@ -109,6 +108,7 @@ public class Rules implements Serializable {
 		 * (2.1) (FALLS ER SCHLAGT): ist Capture moglich? this.Capture == true!
 		 * (3) (FALLS ER NACH HINTEN GEHT) Ist er bedroht? Steht ihm jemand auf dem Weg?
 		 */
+		int mod = board.currentMove == 'w' ? 1 : -1;
 		return false;
 	}
 	public boolean SoldierRetreats() {
@@ -122,24 +122,6 @@ public class Rules implements Serializable {
 			this.addMoves(result);
 		}
 		return null; 
-	}
-	
-	public boolean parseMString(CannonBoard board ,String moveString) {
-		if (moveString.length() != 5) {
-			return false;
-		}
-		//TODO: mit dem IDE uberprufen, ob die Funktion das Richtige macht.
-		char [] Positions = new char[5];
-		moveString.getChars(0, moveString.length(), Positions, 0);
-		//TODO: mit dem IDE uberprufen, ob ich einen char als int verwenden darf. Und ob die Verorderung und Verurderung klappt:
-		if ((!isSoldier(board, Positions[0], Positions[1]) || !isCity(board, Positions[0], Positions[1])) && !this.contains(board.signs, Positions[3]) && !this.contains(board.digits, Positions[4])) {
-			return false;
-		}
-		this.fromX = Positions[0];
-		this.fromY = Positions[1];
-		this.toX = Positions[3];
-		this.toY = Positions[4];
-		return true;
 	}
 	
 	public boolean isCannone() {

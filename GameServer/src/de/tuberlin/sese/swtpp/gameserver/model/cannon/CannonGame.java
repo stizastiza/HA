@@ -43,7 +43,9 @@ public class CannonGame extends Game implements Serializable{
 		this.started = true;
 		this.Board = new CannonBoard();
 		this.rules = new Rules();
-		
+		this.setBoard("/1w1w1w1w1w/1w1w1w1w1w/1w1w1w1w1w///b1b1b1b1b1/b1b1b1b1b1/b1b1b1b1b1/ w");
+		this.Board.currentMove = 'w';
+		this.setNextPlayer(whitePlayer);
 	}
 	
 	/*******************************************
@@ -241,11 +243,17 @@ public class CannonGame extends Game implements Serializable{
 	 */
 	@Override
 	public boolean tryMove(String moveString, Player player) {
-		// DO I HAVE ANY LEGAL MOVES?
+		// TODO: game.status != finished // DO I HAVE ANY LEGAL MOVES?
 		// IT HAS TO BE CHECKED IF THE MOVE CAN BE PERFORMED:
-		if (!this.rules.MoveParser(moveString)) {
+		if (!this.rules.MoveParser(this.Board, moveString, this.getMoveCount())) {
 			return false;
 		}
+		// TODO: setBoard() (die w oder b am Ende hinzugefugt abhangig davon wer gerade dran war)
+		// TODO: den Schritt mit new Move() Konstruktor erstellen
+		// TODO: (!!!) wird uberpruft, ob das Spiel durch diesen Zug zum Ende ist
+		// (!!!): die Stadt wird geschlagen? hat der gegn. Spieler keine legale Moves mehr (sie konnen sich nicht bewegen/es gibt nichts zu bewegen)?
+		// TODO: set next player.
+		// TODO: update history (add move to history)
 		
 		
 		// set board wird hier angewendet
