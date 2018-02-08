@@ -7,7 +7,9 @@ public class Rules implements Serializable {
 	private static final long serialVersionUID = 5424778147226994452L;
 	Map<Character, Integer> letter;
 	char[] letters = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'};
-	
+	// Location members:
+	char fromX, toX;
+	int fromY, toY;
 	/**
 	 * Constructor
 	 */
@@ -23,6 +25,22 @@ public class Rules implements Serializable {
 		letter.put('h', 7);
 		letter.put('i', 8);
 		letter.put('j', 9);
+	}
+	/**
+	 * this method uses other boolean checks to give an exact answer back
+	 * to tryMove():
+	 * @param board
+	 * @param moveString
+	 * @return true/false
+	 */
+	public boolean MoveParser(CannonBoard board, String moveString) {
+		// liegt moveString innerhalb des moglichen Bereiches, + isSoldier + isCity
+		if (!this.parseMString(board, moveString)) {
+			return false;
+		}
+		
+		
+		return true;	
 	}
 	
 	public BoardSquare Soldier(CannonBoard board, char fromX, int fromY, char toX, int toY) {
@@ -40,15 +58,21 @@ public class Rules implements Serializable {
 			Soldier = board.pieces.get(Soldiers.get(i));
 			soldierX = letter.get(Soldier.square.x);
 			soldierY = Soldier.square.y;
-			// Check if soldier could move to the given square
-			if (
-					
-				)
-			
+			// Check if soldier could move to the given square	
 		}
-		
-		
 		return result;
+	}
+	public boolean soldierMoves(CannonBoard board, String moveString) {
+		// parseMString checks, if (1) it`s a soldier, (2) squares exist
+		// and also sets all location members of the class:
+		if (!this.parseMString(board ,moveString)) {
+			return false;
+		}
+		// can a soldier move? 
+		if (!this.SoldierCanMove(board, this.fromX, this.fromY, this.toX, this.toY)) {
+			return false;
+		}
+		return true;
 	}
 	
 	public BoardPiece City(CannonBoard board, char fromX, int fromY, char toX, int toY) {
@@ -67,18 +91,15 @@ public class Rules implements Serializable {
 		}
 		return result;
 	}
-	// TODO:
+	
 	public boolean isSoldier(CannonBoard board, char fromX, int fromY) {
-		/* TODO: Regeln:
-		 * (0) fromX und fromY innerhalb des Spielfeldes liegen?
-		 * (1) auf fromX und fromY steht ein Spielstein?
-		 */
 		//(0):
 		boolean result0 = this.contains(board.signs, fromX) && this.contains(board.digits, fromY) ? true : false;
 		//(1):
 		boolean result = result0 && (board.squares.get(fromX)[fromY].piece.name == 'w' || board.squares.get(fromX)[fromY].piece.name == 'b') ? true : false;
 		return result;
 	}
+	
 	public boolean SoldierCanMove(CannonBoard board, char fromX, int fromY, char toX, int toY) {
 		/* TODO: Regeln:
 		 * (~) liegt toX und toY innerhalb des Spielfeldes?
@@ -93,6 +114,7 @@ public class Rules implements Serializable {
 	public boolean SoldierRetreats() {
 		return false;
 	}
+	
 	// TODO: Die Methode erstellt einen Map von moglichen Moves von allen Figuren auf dem Spielbrett.
 	public Map<BoardPiece, BoardSquare[]> getLegalMoves(CannonBoard board) {
 		Map<BoardPiece, BoardSquare[]> result = new HashMap<BoardPiece, BoardSquare[]>();
@@ -100,6 +122,24 @@ public class Rules implements Serializable {
 			this.addMoves(result);
 		}
 		return null; 
+	}
+	
+	public boolean parseMString(CannonBoard board ,String moveString) {
+		if (moveString.length() != 5) {
+			return false;
+		}
+		//TODO: mit dem IDE uberprufen, ob die Funktion das Richtige macht.
+		char [] Positions = new char[5];
+		moveString.getChars(0, moveString.length(), Positions, 0);
+		//TODO: mit dem IDE uberprufen, ob ich einen char als int verwenden darf. Und ob die Verorderung und Verurderung klappt:
+		if ((!isSoldier(board, Positions[0], Positions[1]) || !isCity(board, Positions[0], Positions[1])) && !this.contains(board.signs, Positions[3]) && !this.contains(board.digits, Positions[4])) {
+			return false;
+		}
+		this.fromX = Positions[0];
+		this.fromY = Positions[1];
+		this.toX = Positions[3];
+		this.toY = Positions[4];
+		return true;
 	}
 	
 	public boolean isCannone() {

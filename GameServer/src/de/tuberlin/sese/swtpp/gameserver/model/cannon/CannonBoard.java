@@ -87,7 +87,7 @@ public class CannonBoard implements Serializable {
 		return result;
 	}
 	
-	// switchMove() does the same as updateNext()
+	// TODO: switchNext() implementieren
 	
 	// MOVE FUNCTION (!not limited!):
 	public void makeMove(char fromX, int fromY, char toX, int toY, boolean capture) {

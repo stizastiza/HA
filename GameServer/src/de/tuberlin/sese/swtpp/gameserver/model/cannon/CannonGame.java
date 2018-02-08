@@ -242,17 +242,11 @@ public class CannonGame extends Game implements Serializable{
 	@Override
 	public boolean tryMove(String moveString, Player player) {
 		// DO I HAVE ANY LEGAL MOVES?
-		//TODO: implement
-		// wir vergleichen den string aus getBoard() mit dem moveString und
-		// bekommen einen Schrittfall
+		// IT HAS TO BE CHECKED IF THE MOVE CAN BE PERFORMED:
+		if (!this.rules.MoveParser(moveString)) {
+			return false;
+		}
 		
-		//TODO: // is der Spieler dran?
-		
-		//TODO: // Stadt richtig platziert?
-		
-		//
-		
-		String CurrState = this.getBoard();
 		
 		// set board wird hier angewendet
 				/*
