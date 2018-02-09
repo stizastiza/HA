@@ -185,7 +185,40 @@ public class Rules implements Serializable {
 	
 	public List<MoveTupel> getRetreatMoves(CannonBoard board, BoardPiece p, int mod) {
 		List<MoveTupel> possibleMoves = new LinkedList<MoveTupel>();
-		
+		List<MoveTupel> blocked = new LinkedList<MoveTupel>();
+		blocked.addAll(this.getFrontalMoves(board, p, mod*-1));
+		char x = p.square.x;
+		int y = p.square.y;
+		char position6x = this.getKey(this.letter.get(x-(2*mod)));
+		int position6y = y-(2*mod);
+		for(MoveTupel e : blocked){
+			if(e==null){			//frei
+				if (position6x != '0' && position6y>0 && position6y<9 && board.squares.get(position6x)[position6y].piece.name != p.name) {
+					MoveTupel e7 = new MoveTupel(x, y, position6x, position6y);
+					possibleMoves.add(e7);
+				}
+			}
+		}
+		char position7x = this.getKey(this.letter.get(x));
+		int position7y = y-(2*mod);
+		for(MoveTupel e : blocked){
+			if(e==null){			//frei
+				if (position7x != '0' && position7y>0 && position7y<9 && board.squares.get(position7x)[position7y].piece.name != p.name) {
+					MoveTupel e7 = new MoveTupel(x, y, position7x, position7y);
+					possibleMoves.add(e7);
+				}
+			}
+		}
+		char position8x = this.getKey(this.letter.get(x+(2*mod)));
+		int position8y = y-(2*mod);
+		for(MoveTupel e : blocked){
+			if(e==null){			//frei
+				if (position8x != '0' && position8y>0 && position8y<9 && board.squares.get(position8x)[position8y].piece.name != p.name) {
+					MoveTupel e7 = new MoveTupel(x, y, position8x, position8y);
+					possibleMoves.add(e7);
+				}
+			}
+		}
 		return possibleMoves;
 	}
 	
