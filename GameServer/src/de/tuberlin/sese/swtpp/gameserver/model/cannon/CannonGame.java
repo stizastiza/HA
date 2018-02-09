@@ -244,16 +244,28 @@ public class CannonGame extends Game implements Serializable{
 	@Override
 	public boolean tryMove(String moveString, Player player) {
 		// TODO: game.status != finished // DO I HAVE ANY LEGAL MOVES?
+		if (this.getStatus().equals("Finished")) {
+			return false;
+		}
 		// IT HAS TO BE CHECKED IF THE MOVE CAN BE PERFORMED:
 		if (!this.rules.MoveParser(this.Board, moveString, this.getMoveCount())) {
 			return false;
 		}
-		// TODO: setBoard() (die w oder b am Ende hinzugefugt abhangig davon wer gerade dran war)
 		// TODO: den Schritt mit new Move() Konstruktor erstellen
+		String state = "";
+		// TODO: setBoard() (die w oder b am Ende hinzugefugt abhangig davon wer gerade dran war)
+		this.setBoard(state); // ODER>>this.Board.makeMove()!!!
+		// TODO: set next player.
+		this.updateNext();
+		this.Board.switchMove();
 		// TODO: (!!!) wird uberpruft, ob das Spiel durch diesen Zug zum Ende ist
 		// (!!!): die Stadt wird geschlagen? hat der gegn. Spieler keine legale Moves mehr (sie konnen sich nicht bewegen/es gibt nichts zu bewegen)?
-		// TODO: set next player.
+		if (this.rules.GameOver(this.Board)) {
+			this.finish(player);
+		}
+		
 		// TODO: update history (add move to history)
+		
 		
 		
 		// set board wird hier angewendet

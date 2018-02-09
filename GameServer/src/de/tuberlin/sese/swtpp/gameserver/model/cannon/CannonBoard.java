@@ -87,9 +87,18 @@ public class CannonBoard implements Serializable {
 		return result;
 	}
 	
-	// TODO: switchNext() implementieren
+	/**
+	 * Switches the current move
+	 */
+	public void switchMove() {
+		if(this.currentMove == 'w') {
+			this.currentMove = 'b';
+		} else {
+			this.currentMove = 'w';
+		}
+	}
 	
-	// MOVE FUNCTION (!not limited!):
+	// MOVE FUNCTION (!not limited!): 	!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	public void makeMove(char fromX, int fromY, char toX, int toY, boolean capture) {
 		
 		BoardPiece previousPiece = this.squares.get(fromX)[fromY].piece;

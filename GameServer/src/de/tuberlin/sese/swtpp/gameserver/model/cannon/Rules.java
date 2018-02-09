@@ -40,7 +40,7 @@ public class Rules implements Serializable {
 			}
 			return true;
 		} else {
-			boolean m = this.parseMSoldier(board, moveString);
+			boolean m = this.parseMSoldier(board, moveString); //versuchen eine Figur zu bewegen? liegt sie auf dem Spielbrett?
 			boolean result = m == false ? false : this.SoldierCanMove(board, this.fromX, this.fromY, this.toX, this.toY) ? true : false;
 			return result;
 		}
@@ -103,15 +103,9 @@ public class Rules implements Serializable {
 	
 	public boolean SoldierCanMove(CannonBoard board, char fromX, int fromY, char toX, int toY) {
 		/* TODO: Regeln:
-		 * (~) liegt toX und toY innerhalb des Spielfeldes? ist bereits in isSoldier uberpruft
 		 * (0) Gehort der Zug der Menge der moglichen Moves? TODO: getLegalMoves
-		 * (1) Geht er nach hinten oder nach vorne, oder schlagt er?
-		 * (2) Ist er blockiert? (FALLS ER NACH HINTEN ODER NACH VORNE !GEHT!)
-		 * (2.1) (FALLS ER SCHLAGT): ist Capture moglich? this.Capture == true!
-		 * (3) (FALLS ER NACH HINTEN GEHT) Ist er bedroht? Steht ihm jemand auf dem Weg?
 		 */
 		
-		int mod = board.currentMove == 'w' ? 1 : -1;
 		return false;
 	}
 	
@@ -119,32 +113,70 @@ public class Rules implements Serializable {
 		return false;
 	}
 	
-	// TODO: Die Methode erstellt einen List von moglichen Moves von allen Figuren auf dem Spielbrett.
-	public List<String> getLegalMoves(CannonBoard board) {
-		List<String> result = new LinkedList<String>();
-		if (board.currentMove=='w') {
-			for (BoardPiece p: board.pieces) {
-				if (p.name == 'b') {
-					continue;
-				}
-				// for each of 8(?) possible moves, check:
-				String[] Moves = this.constructPossibleMoves(board, p);
-				if () {
-					result.add(Move);
+	
+	public List<MoveTupel> getLegalMoves(CannonBoard board) {
+		List<MoveTupel> result = new LinkedList<MoveTupel>();
+		for (BoardPiece p: board.pieces) {
+			if (p.name != board.currentMove) {
+				continue;
+			}
+			// for each of 8(?) possible moves, check:
+			int mod = board.currentMove == 'w' ? -1 : 1;
+			List<MoveTupel> Moves = this.constructPossibleMoves(board, p, mod);
+			for (MoveTupel move: Moves) {
+				if (move != null) {
+					result.add(move);
 				}
 			}
-			
-			
-		} else {
-			
 		}
-	
 		return result; 
 	}
-	public String[] constructPossibleMoves(board, p) {
+	//TODO: + Cannonen!
+	public List<MoveTupel> constructPossibleMoves(CannonBoard board, BoardPiece p, int mod) {
+		// mit Koordinaten von p alle moeglichen Bewegungen angeben und die der String[] Array hinzufugen und zuruckgeben!
+		/*
+		 * (1) Geht er nach hinten oder nach vorne, oder schlagt er?
+		 * (2) Ist er blockiert? (FALLS ER NACH HINTEN ODER NACH VORNE !GEHT!)
+		 * (2.1) (FALLS ER SCHLAGT): ist Capture moglich? this.Capture == true!
+		 * (3) (FALLS ER NACH HINTEN GEHT) Ist er bedroht? Steht ihm jemand auf dem Weg?
+		 */
+		List<MoveTupel> possibleMoves = new LinkedList<MoveTupel>();
+		possibleMoves.addAll(this.getFrontalMoves(board, p, mod));
+		possibleMoves.addAll(this.getSideMoves(board, p, mod));
+		possibleMoves.addAll(this.getRetreatMoves(board, p, mod));
+		return possibleMoves;
+	}
+	public List<MoveTupel> getFrontalMoves(CannonBoard board, BoardPiece p, int mod) {
+		List<MoveTupel> possibleMoves = new LinkedList<MoveTupel>();
+		char x = p.square.x;
+		int y = p.square.y;
+		/*(1)*/ char position1x = this.getKey(this.letter.get(x)-mod);
+				int position1y = y+mod;
+				if (position1x != '0' && position1y>0 && position1y<9 && board.squares.get(position1x)[position1y].piece.name != p.name) {
+					MoveTupel
+					possibleMoves.add()
+				}
+		/*(2)*/ char position2x = x;
+				int position2y = y+mod;
+				
+		/*(3)*/ char position3x = this.getKey(this.letter.get(x)+mod);
+				int position3y = y+mod;
+				
+		return possibleMoves;
+	}
+	public List<MoveTupel> getSideMoves(CannonBoard board, BoardPiece p, int mod) {
+		List<MoveTupel> possibleMoves = new LinkedList<MoveTupel>();
 		
+		return possibleMoves;
+	}
+	public List<MoveTupel> getRetreatMoves(CannonBoard board, BoardPiece p, int mod) {
+		List<MoveTupel> possibleMoves = new LinkedList<MoveTupel>();
+		
+		return possibleMoves;
 	}
 	
+	
+	/*
 	public boolean isCannone() {
 		return false;
 	}
@@ -154,6 +186,10 @@ public class Rules implements Serializable {
 	public boolean CannonCanMove() {
 		return false;
 	}
+	*/
+	
+	
+	
 	// Coordination:
 	public boolean contains(int[] arr, int item) {
 		      for (int n : arr) {
@@ -163,7 +199,7 @@ public class Rules implements Serializable {
 		      }
 		      return false;
 		   }
-	   public boolean contains(char[] arr, char item) {
+	 public boolean contains(char[] arr, char item) {
 		      for (char n : arr) {
 		         if (item == n) {
 		            return true;
@@ -171,5 +207,13 @@ public class Rules implements Serializable {
 		      }
 		      return false;
 		   }
+	 public char getKey(int value) {
+		 for (char i: this.letter.keySet()) {
+			 if (this.letter.get(i) == value) {
+				 return i;
+			 }
+		 }
+		 return '0';
+	 }
 
 }
