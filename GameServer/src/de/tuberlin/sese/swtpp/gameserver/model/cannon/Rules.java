@@ -133,13 +133,6 @@ public class Rules implements Serializable {
 	}
 	//TODO: + Cannonen!
 	public List<MoveTupel> constructPossibleMoves(CannonBoard board, BoardPiece p, int mod) {
-		// mit Koordinaten von p alle moeglichen Bewegungen angeben und die der String[] Array hinzufugen und zuruckgeben!
-		/*
-		 * (1) Geht er nach hinten oder nach vorne, oder schlagt er?
-		 * (2) Ist er blockiert? (FALLS ER NACH HINTEN ODER NACH VORNE !GEHT!)
-		 * (2.1) (FALLS ER SCHLAGT): ist Capture moglich? this.Capture == true!
-		 * (3) (FALLS ER NACH HINTEN GEHT) Ist er bedroht? Steht ihm jemand auf dem Weg?
-		 */
 		List<MoveTupel> possibleMoves = new LinkedList<MoveTupel>();
 		possibleMoves.addAll(this.getFrontalMoves(board, p, mod));
 		possibleMoves.addAll(this.getSideMoves(board, p, mod));
@@ -153,15 +146,21 @@ public class Rules implements Serializable {
 		/*(1)*/ char position1x = this.getKey(this.letter.get(x)-mod);
 				int position1y = y+mod;
 				if (position1x != '0' && position1y>0 && position1y<9 && board.squares.get(position1x)[position1y].piece.name != p.name) {
-					MoveTupel
-					possibleMoves.add()
+					MoveTupel a = new MoveTupel(x, y, position1x, position1y);
+					possibleMoves.add(a);
 				}
 		/*(2)*/ char position2x = x;
 				int position2y = y+mod;
-				
+				if (position2y>0 && position2y<9 && board.squares.get(position2x)[position2y].piece.name != p.name) {
+					MoveTupel b = new MoveTupel(x, y, position2x, position2y);
+					possibleMoves.add(b);
+				}
 		/*(3)*/ char position3x = this.getKey(this.letter.get(x)+mod);
 				int position3y = y+mod;
-				
+				if (position3x != '0' && position3y>0 && position3y<9 && board.squares.get(position3x)[position3y].piece.name != p.name) {
+					MoveTupel c = new MoveTupel(x, y, position3x, position3y);
+					possibleMoves.add(c);
+				}
 		return possibleMoves;
 	}
 	public List<MoveTupel> getSideMoves(CannonBoard board, BoardPiece p, int mod) {
