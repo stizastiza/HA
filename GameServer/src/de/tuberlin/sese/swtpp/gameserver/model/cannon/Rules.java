@@ -102,10 +102,10 @@ public class Rules implements Serializable {
 	}
 	
 	public boolean SoldierCanMove(CannonBoard board, char fromX, int fromY, char toX, int toY) {
-		/* TODO: Regeln:
-		 * (0) Gehort der Zug der Menge der moglichen Moves? TODO: getLegalMoves
-		 */
-		
+		MoveTupel t = new MoveTupel(fromX, fromY, toX, toY);
+		if (this.getLegalMoves(board).contains(t)) {
+			return true;
+		}
 		return false;
 	}
 	
@@ -262,7 +262,10 @@ public class Rules implements Serializable {
 		return false;
 	}
 	*/
-	
+	//TODO:
+	public boolean GameOver(CannonBoard board, char Player) {
+		return false;
+	}
 	
 	
 	// Coordination:

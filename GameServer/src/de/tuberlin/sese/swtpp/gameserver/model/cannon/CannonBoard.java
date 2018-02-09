@@ -15,9 +15,6 @@ public class CannonBoard implements Serializable {
 	
 	// 'w' or 'b' - Zeigt wer dran ist (wird am Ende des FEN-Strings hinzugefuegt)
 	char currentMove;
-	// String currentState?
-	// possible moves:
-	//TODO: ADD SPECIALITIES
 	// Pieces (Spielsteine) of the board:
 	List<BoardPiece> pieces;
 	// Squares of the board:
@@ -98,7 +95,7 @@ public class CannonBoard implements Serializable {
 		}
 	}
 	
-	// MOVE FUNCTION (!not limited!): 	!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	// TODO: ANPASSEN!!!! MOVE FUNCTION (!not limited!): kann man zB die Cannone nicht bewegen
 	public void makeMove(char fromX, int fromY, char toX, int toY, boolean capture) {
 		
 		BoardPiece previousPiece = this.squares.get(fromX)[fromY].piece;

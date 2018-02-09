@@ -14,8 +14,14 @@ import de.tuberlin.sese.swtpp.gameserver.model.Player;
 public class CannonGame extends Game implements Serializable{
 
 
-	/**
+	/** TODO ALLGEMEIN:
 	 * TODO: was bedeutet serialVersionUID ???
+	 * CannonGame.java: CannonGame Constructor, tryMove
+	 * CannonBoard.java: aus dem Konstruktor die Zeilen in den Kopf verschieben, 
+	 * CannonBoard.java: makeMove(), loadFEN()
+	 * Rules.java: getCannonFrontal/RetreatMoves(), GameOver()
+	 * jUnit Tests
+	 * mit dem Eclipse Plugin EMMA sich auskennen
 	 */
 	private static final long serialVersionUID = 5424778147226994452L;
 	
@@ -265,38 +271,6 @@ public class CannonGame extends Game implements Serializable{
 		}
 		
 		// TODO: update history (add move to history)
-		
-		
-		
-		// set board wird hier angewendet
-				/*
-		 * getBoard auslesen, wer dran ist
-		 * move string auslesen, welches das erste feld ist und zweite feld ist -- parsing, also eher in die getBoard methode
-		 * was steht auf dem zweiten feld? int setzen um zu wissen ob geschlagen/geschossen wird oder rückzug möglich...
-		 * 		case 1 : nix
-		 * 		case 2 : eigene figur
-		 * 			return false
-		 * 		case 3 : gegner
-		 * 
-		 * überprüfen ob auf dem ersten feld eine figur des spielers steht der dran ist
-		 * 		wenn nicht return false
-		 * wo ist das zweite feld?
-		 * 		case 1: 4 oder 5 felder weg -> kanone
-		 * 				überprüfen ob kanone möglich ist
-		 * 					nur möglich wenn zweites feld gegner und 3 eigene soldaten in reihe
-		 * 	
-		 * 		case 2: erstes feld gleich zweites feld -> stadt
-		 * 				überprüfen ob für weiß in der letzen und schwarz in der ersten reihe
-		 * 				überprüfen ob schon stadt plaziert wurde
-		 * 					boolean
-		 * 		
-		 * 		case 3: zweites feld zwei hinter erstem feld -> rückzug
-		 * 				überprüfen ob bedroht wird (diagonal rechts/links oder vorne)
-		 * 					wenn ja überprüfen ob weg frei ist (hinter dem soldaten kein weitere soldat)
-		 * 		case 4: zweites feld neben oder vor erstem feld -> schlagen/bewegen
-		 * 				gegnerische figur auf dem nebenfeld, dann bewegung/schlagen möglich
-		 * 				gegnerische figur oder nix vor eigener figur, dann bewegung möglich
-		 */
 		
 		return true;
 	}
