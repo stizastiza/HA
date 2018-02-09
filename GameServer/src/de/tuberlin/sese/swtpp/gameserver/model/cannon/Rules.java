@@ -153,8 +153,8 @@ public class Rules implements Serializable {
 		/*(1)*/ char position1x = this.getKey(this.letter.get(x)-mod);
 				int position1y = y+mod;
 				if (position1x != '0' && position1y>0 && position1y<9 && board.squares.get(position1x)[position1y].piece.name != p.name) {
-					MoveTupel
-					possibleMoves.add()
+					MoveTupel a = new MoveTupel(x, y, position1x, position1y);
+					possibleMoves.add(a);
 				}
 		/*(2)*/ char position2x = x;
 				int position2y = y+mod;
