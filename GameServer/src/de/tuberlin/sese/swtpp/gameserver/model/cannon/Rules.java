@@ -119,7 +119,7 @@ public class Rules implements Serializable {
 		return false;
 	}
 	
-	// TODO: Die Methode erstellt einen Map von moglichen Moves von allen Figuren auf dem Spielbrett.
+	// TODO: Die Methode erstellt einen List von moglichen Moves von allen Figuren auf dem Spielbrett.
 	public List<String> getLegalMoves(CannonBoard board) {
 		List<String> result = new LinkedList<String>();
 		if (board.currentMove=='w') {
@@ -127,8 +127,8 @@ public class Rules implements Serializable {
 				if (p.name == 'b') {
 					continue;
 				}
-				// for each of 8 possible moves, check:
-				String Move;
+				// for each of 8(?) possible moves, check:
+				String[] Moves = this.constructPossibleMoves(board, p);
 				if () {
 					result.add(Move);
 				}
@@ -140,6 +140,9 @@ public class Rules implements Serializable {
 		}
 	
 		return result; 
+	}
+	public String[] constructPossibleMoves(board, p) {
+		
 	}
 	
 	public boolean isCannone() {
