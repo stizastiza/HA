@@ -138,6 +138,7 @@ public class Rules implements Serializable {
 		possibleMoves.addAll(this.getSideMoves(board, p, mod));
 		possibleMoves.addAll(this.getRetreatMoves(board, p, mod));
 		possibleMoves.addAll(this.getCannonFrontalMoves(board, p, mod));
+		possibleMoves.addAll(this.getCannonRetreatMoves(board, p, mod));
 		return possibleMoves;
 	}
 	public List<MoveTupel> getFrontalMoves(CannonBoard board, BoardPiece p, int mod) {
@@ -224,16 +225,26 @@ public class Rules implements Serializable {
 	
 	public List<MoveTupel> getCannonFrontalMoves(CannonBoard board, BoardPiece p, int mod) {
 		List<MoveTupel> possibleMoves = new LinkedList<MoveTupel>();
-		possibleMoves.addAll(c);
-		possibleMoves.addAll(c);
+		if (this.isCannone(board, p)) {
+			possibleMoves.addAll(c);
+			possibleMoves.addAll(c);
+		}
+		return possibleMoves;
+	}
+	public List<MoveTupel> getCannonRetreatMoves(CannonBoard board, BoardPiece p, int mod) {
+		List<MoveTupel> possibleMoves = new LinkedList<MoveTupel>();
+		if (this.isCannone(board, p)) {
+			possibleMoves.addAll(c);
+			possibleMoves.addAll(c);
+		}
 		return possibleMoves;
 	}
 	
 	
-	/*
-	public boolean isCannone() {
+	public boolean isCannone(CannonBoard board, BoardPiece p) {
 		return false;
 	}
+	/*
 	public boolean CannonCanShoot() {
 		return false;
 	}
