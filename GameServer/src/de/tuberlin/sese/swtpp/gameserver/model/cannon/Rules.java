@@ -191,7 +191,8 @@ public class Rules implements Serializable {
 	
 	public List<MoveTupel> getCannonFrontalMoves(CannonBoard board, BoardPiece p, int mod) {
 		List<MoveTupel> possibleMoves = new LinkedList<MoveTupel>();
-		
+		possibleMoves.addAll(c);
+		possibleMoves.addAll(c);
 		return possibleMoves;
 	}
 	
