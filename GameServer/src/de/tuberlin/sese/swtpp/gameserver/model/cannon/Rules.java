@@ -166,9 +166,23 @@ public class Rules implements Serializable {
 	}
 	public List<MoveTupel> getSideMoves(CannonBoard board, BoardPiece p, int mod) {
 		List<MoveTupel> possibleMoves = new LinkedList<MoveTupel>();
-		
+		char x = p.square.x;
+		int y = p.square.y;
+		/*(4)*/ char position4x = this.getKey(this.letter.get(x)-mod);
+				int position4y = y;
+				if (position4x != '0' && position4y>0 && position4y<9 && board.squares.get(position4x)[position4y].piece.name != p.name && board.squares.get(position4x)[position4y].piece != null) {
+					MoveTupel e4 = new MoveTupel(x, y, position4x, position4y);
+					possibleMoves.add(e4);
+				}
+		/*(5)*/ char position5x = this.getKey(this.letter.get(x)-mod);
+				int position5y = y;
+				if (position5x != '0' && position5y>0 && position5y<9 && board.squares.get(position5x)[position5y].piece.name != p.name && board.squares.get(position5x)[position5y].piece != null) {
+					MoveTupel e5 = new MoveTupel(x, y, position5x, position5y);
+					possibleMoves.add(e5);
+				}
 		return possibleMoves;
 	}
+	
 	public List<MoveTupel> getRetreatMoves(CannonBoard board, BoardPiece p, int mod) {
 		List<MoveTupel> possibleMoves = new LinkedList<MoveTupel>();
 		
