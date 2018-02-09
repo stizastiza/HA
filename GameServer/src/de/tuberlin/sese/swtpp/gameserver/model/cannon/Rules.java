@@ -174,7 +174,7 @@ public class Rules implements Serializable {
 					MoveTupel e4 = new MoveTupel(x, y, position4x, position4y);
 					possibleMoves.add(e4);
 				}
-		/*(5)*/ char position5x = this.getKey(this.letter.get(x)-mod);
+		/*(5)*/ char position5x = this.getKey(this.letter.get(x)+mod);
 				int position5y = y;
 				if (position5x != '0' && position5y>0 && position5y<9 && board.squares.get(position5x)[position5y].piece.name != p.name && board.squares.get(position5x)[position5y].piece != null) {
 					MoveTupel e5 = new MoveTupel(x, y, position5x, position5y);
@@ -185,41 +185,51 @@ public class Rules implements Serializable {
 	
 	public List<MoveTupel> getRetreatMoves(CannonBoard board, BoardPiece p, int mod) {
 		List<MoveTupel> possibleMoves = new LinkedList<MoveTupel>();
-		List<MoveTupel> blocked = new LinkedList<MoveTupel>();
-		blocked.addAll(this.getFrontalMoves(board, p, mod*-1));
 		char x = p.square.x;
 		int y = p.square.y;
 		char position6x = this.getKey(this.letter.get(x-(2*mod)));
 		int position6y = y-(2*mod);
-		for(MoveTupel e : blocked){
-			if(e==null){			//frei
-				if (position6x != '0' && position6y>0 && position6y<9 && board.squares.get(position6x)[position6y].piece.name != p.name) {
-					MoveTupel e7 = new MoveTupel(x, y, position6x, position6y);
-					possibleMoves.add(e7);
+		char position6x1 = this.getKey(this.letter.get(x-(mod)));
+				if (menace(board, p, mod) && position6x != '0' && position6y>0 && position6y<9 && board.squares.get(position6x)[position6y].piece == null && board.squares.get(position6x1)[position6y+mod].piece == null) {
+					MoveTupel e = new MoveTupel(x, y, position6x, position6y);
+					possibleMoves.add(e);
 				}
-			}
-		}
 		char position7x = this.getKey(this.letter.get(x));
 		int position7y = y-(2*mod);
-		for(MoveTupel e : blocked){
-			if(e==null){			//frei
-				if (position7x != '0' && position7y>0 && position7y<9 && board.squares.get(position7x)[position7y].piece.name != p.name) {
-					MoveTupel e7 = new MoveTupel(x, y, position7x, position7y);
-					possibleMoves.add(e7);
+				if (menace(board, p, mod) && position7x != '0' && position7y>0 && position7y<9 && board.squares.get(position7x)[position7y].piece == null && board.squares.get(position7x)[position7y+mod].piece == null) {
+					MoveTupel e = new MoveTupel(x, y, position7x, position7y);
+					possibleMoves.add(e);
 				}
-			}
-		}
 		char position8x = this.getKey(this.letter.get(x+(2*mod)));
 		int position8y = y-(2*mod);
-		for(MoveTupel e : blocked){
-			if(e==null){			//frei
-				if (position8x != '0' && position8y>0 && position8y<9 && board.squares.get(position8x)[position8y].piece.name != p.name) {
-					MoveTupel e7 = new MoveTupel(x, y, position8x, position8y);
-					possibleMoves.add(e7);
+		char position8x1 = this.getKey(this.letter.get(x+(mod)));
+				if (menace(board, p, mod) && position8x != '0' && position8y>0 && position8y<9 && board.squares.get(position8x)[position8y].piece == null && board.squares.get(position8x1)[position8y+mod].piece == null) {
+					MoveTupel e = new MoveTupel(x, y, position8x, position8y);
+					possibleMoves.add(e);
 				}
+		return possibleMoves;
+	}
+	
+	public boolean menace(CannonBoard board, BoardPiece p, int mod){
+		char x = p.square.x;
+		int y = p.square.y;
+		char positionx1 = this.getKey(this.letter.get(x));
+		char positionx2 = this.getKey(this.letter.get(x-mod));
+		char positionx3 = this.getKey(this.letter.get(x+mod));
+		int positiony = y-mod;
+		for(int i = 0; i>3*mod ;i=i+mod){
+			
+			if(board.squares.get(positionx1)[positiony+i].piece.name != board.currentMove &&board.squares.get(positionx1)[i].piece.name != 'B' && board.squares.get(positionx2)[i].piece.name != 'W' ){
+				return true;
+			}
+			if(board.squares.get(positionx2)[positiony+i].piece.name != board.currentMove &&board.squares.get(positionx2)[i].piece.name != 'B' && board.squares.get(positionx2)[i].piece.name != 'W' ){
+				return true;
+			}
+			if(board.squares.get(positionx3)[positiony+i].piece.name != board.currentMove &&board.squares.get(positionx3)[i].piece.name != 'B' && board.squares.get(positionx3)[i].piece.name != 'W' ){
+				return true;
 			}
 		}
-		return possibleMoves;
+		return false;
 	}
 	
 	public List<MoveTupel> getCannonFrontalMoves(CannonBoard board, BoardPiece p, int mod) {
