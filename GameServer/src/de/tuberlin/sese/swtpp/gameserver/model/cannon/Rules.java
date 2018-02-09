@@ -103,27 +103,43 @@ public class Rules implements Serializable {
 	
 	public boolean SoldierCanMove(CannonBoard board, char fromX, int fromY, char toX, int toY) {
 		/* TODO: Regeln:
-		 * (~) liegt toX und toY innerhalb des Spielfeldes?
-		 * (0) Gehort der Zug der Menge der moglichen Moves?
+		 * (~) liegt toX und toY innerhalb des Spielfeldes? ist bereits in isSoldier uberpruft
+		 * (0) Gehort der Zug der Menge der moglichen Moves? TODO: getLegalMoves
 		 * (1) Geht er nach hinten oder nach vorne, oder schlagt er?
 		 * (2) Ist er blockiert? (FALLS ER NACH HINTEN ODER NACH VORNE !GEHT!)
 		 * (2.1) (FALLS ER SCHLAGT): ist Capture moglich? this.Capture == true!
 		 * (3) (FALLS ER NACH HINTEN GEHT) Ist er bedroht? Steht ihm jemand auf dem Weg?
 		 */
+		
 		int mod = board.currentMove == 'w' ? 1 : -1;
 		return false;
 	}
+	
 	public boolean SoldierRetreats() {
 		return false;
 	}
 	
 	// TODO: Die Methode erstellt einen Map von moglichen Moves von allen Figuren auf dem Spielbrett.
-	public Map<BoardPiece, BoardSquare[]> getLegalMoves(CannonBoard board) {
-		Map<BoardPiece, BoardSquare[]> result = new HashMap<BoardPiece, BoardSquare[]>();
-		for (BoardPiece Figure: board.pieces) {
-			this.addMoves(result);
+	public List<String> getLegalMoves(CannonBoard board) {
+		List<String> result = new LinkedList<String>();
+		if (board.currentMove=='w') {
+			for (BoardPiece p: board.pieces) {
+				if (p.name == 'b') {
+					continue;
+				}
+				// for each of 8 possible moves, check:
+				String Move;
+				if () {
+					result.add(Move);
+				}
+			}
+			
+			
+		} else {
+			
 		}
-		return null; 
+	
+		return result; 
 	}
 	
 	public boolean isCannone() {
@@ -135,7 +151,7 @@ public class Rules implements Serializable {
 	public boolean CannonCanMove() {
 		return false;
 	}
-	
+	// Coordination:
 	public boolean contains(int[] arr, int item) {
 		      for (int n : arr) {
 		         if (item == n) {
