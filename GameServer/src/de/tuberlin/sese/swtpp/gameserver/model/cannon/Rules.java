@@ -279,23 +279,20 @@ public class Rules implements Serializable {
 		/*Back*/ if (board.squares.get(x)[y-2*mod].piece.name == p.name && board.squares.get(x)[y-mod].piece.name == p.name) {
 			kind.add("Back");
 		}
-		/*DiagonalRightFront*/ if (board.squares.get(x)[y-2*mod].piece.name == p.name && board.squares.get(x)[y-mod].piece.name == p.name) {
+		/*DiagonalRightFront*/ if (board.squares.get(this.getKey(this.letter.get(x)+mod))[y+mod].piece.name == p.name && board.squares.get(this.getKey(this.letter.get(x)+2*mod))[y+2*mod].piece.name == p.name) {
 			kind.add("DiagonalRightFront");
 		}
-		/*DiagonalRightBack*/ if (board.squares.get(this.getKey(this.letter.get(x)))[y-2*mod].piece.name == p.name && board.squares.get(x)[y-mod].piece.name == p.name) {
-			kind.add("DiagonalRightFront");
+		/*DiagonalRightBack*/ if (board.squares.get(this.getKey(this.letter.get(x)-mod))[y-mod].piece.name == p.name && board.squares.get(this.getKey(this.letter.get(x)-2*mod))[y-2*mod].piece.name == p.name) {
+			kind.add("DiagonalRightBack");
 		}
-		/*DiagonalLeftFront*/ if (board.squares.get()[])
+		/*DiagonalLeftFront*/ if (board.squares.get(this.getKey(this.letter.get(x)-mod))[y+mod].piece.name == p.name && board.squares.get(this.getKey(this.letter.get(x)-2*mod))[y+2*mod].piece.name == p.name) {
+			kind.add("DiagonalLeftFront");
+		}
+		/*DiagonalLeftBack*/ if (board.squares.get(this.getKey(this.letter.get(x)+mod))[y-mod].piece.name == p.name && board.squares.get(this.getKey(this.letter.get(x)+2*mod))[y-2*mod].piece.name == p.name) {
+			kind.add("DiagonalLeftBack");
+		}
 		return kind;
 	}
-	/*
-	public boolean CannonCanShoot() {
-		return false;
-	}
-	public boolean CannonCanMove() {
-		return false;
-	}
-	*/
 	//TODO:
 	public boolean GameOver(CannonBoard board, char Player) {
 		return false;
