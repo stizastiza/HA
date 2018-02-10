@@ -371,7 +371,13 @@ public class Rules implements Serializable {
 	}
 	public List<MoveTupel> getCannonDiagonalRightFront(CannonBoard board, BoardPiece p, int mod) {
 		List<MoveTupel> possibleMoves = new LinkedList<MoveTupel>();
-		
+		char x = p.square.x;
+		int y = p.square.y;
+		char position1x = this.getKey(this.letter.get(x)+3*mod); 
+		int position1y = y+3*mod;
+		if (position1x != '0' && position1y>=0 && position1y<=9 && board.squares.get(position1x)[position1y].piece == null) {
+			
+		}
 		
 		return possibleMoves;
 	}
