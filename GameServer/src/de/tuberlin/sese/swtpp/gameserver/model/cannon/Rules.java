@@ -131,10 +131,12 @@ public class Rules implements Serializable {
 		possibleMoves.addAll(this.getFrontalMoves(board, p, mod));
 		possibleMoves.addAll(this.getSideMoves(board, p, mod));
 		possibleMoves.addAll(this.getRetreatMoves(board, p, mod));
-		possibleMoves.addAll(this.getCannonFrontalMoves(board, p, mod));
-		possibleMoves.addAll(this.getCannonRetreatMoves(board, p, mod));
-		possibleMoves.addAll(this.getCannonDiagonalMoves(board, p, mod));
-		possibleMoves.addAll(this.getCannonSideMoves(board, p, mod));
+		if (!this.isInCannon(board, p, mod).isEmpty()) {
+			possibleMoves.addAll(this.getCannonFrontalMoves(board, p, mod));
+			possibleMoves.addAll(this.getCannonRetreatMoves(board, p, mod));
+			possibleMoves.addAll(this.getCannonDiagonalMoves(board, p, mod));
+			possibleMoves.addAll(this.getCannonSideMoves(board, p, mod));
+		}
 		return possibleMoves;
 	}
 	public List<MoveTupel> getFrontalMoves(CannonBoard board, BoardPiece p, int mod) {
@@ -231,7 +233,7 @@ public class Rules implements Serializable {
 	
 	public List<MoveTupel> getCannonFrontalMoves(CannonBoard board, BoardPiece p, int mod) {
 		List<MoveTupel> possibleMoves = new LinkedList<MoveTupel>();
-		if (this.isCannone(board, p)) {
+		if (this.isInCannon(board, p, mod).contains("Forward")) {
 			possibleMoves.addAll(this.getCannonFrontalShoot(board, p, mod));
 			
 			
@@ -263,11 +265,11 @@ public class Rules implements Serializable {
 		}
 		return possibleMoves;
 	}
-	
+	/*
 	public List<MoveTupel> getCannonFrontalShoot() {
 		return possibleMoves;
 	}
-	
+	*/
 	
 	public List<String> isInCannon(CannonBoard board, BoardPiece p, int mod) {
 		List<String> kind = new LinkedList<String>();
@@ -290,6 +292,12 @@ public class Rules implements Serializable {
 		}
 		/*DiagonalLeftBack*/ if (board.squares.get(this.getKey(this.letter.get(x)+mod))[y-mod].piece.name == p.name && board.squares.get(this.getKey(this.letter.get(x)+2*mod))[y-2*mod].piece.name == p.name) {
 			kind.add("DiagonalLeftBack");
+		}
+		/*SideRight*/ if (board.squares.get(this.getKey(this.letter.get(x)+mod))[y].piece.name == p.name && board.squares.get(this.getKey(this.letter.get(x)+2*mod))[y].piece.name == p.name) {
+			kind.add("SideRight");
+		}
+		/*SideLeft*/ if(board.squares.get(this.getKey(this.letter.get(x)-mod))[y].piece.name == p.name && board.squares.get(this.getKey(this.letter.get(x)-2*mod))[y].piece.name == p.name) {
+			kind.add("SideLeft");
 		}
 		return kind;
 	}
