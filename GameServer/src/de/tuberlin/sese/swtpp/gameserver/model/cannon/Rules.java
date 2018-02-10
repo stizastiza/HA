@@ -108,19 +108,13 @@ public class Rules implements Serializable {
 		}
 		return false;
 	}
-	
-	public boolean SoldierRetreats() {
-		return false;
-	}
-	
-	
+
 	public List<MoveTupel> getLegalMoves(CannonBoard board) {
 		List<MoveTupel> result = new LinkedList<MoveTupel>();
 		for (BoardPiece p: board.pieces) {
 			if (p.name != board.currentMove) {
 				continue;
 			}
-			// for each of 8(?) possible moves, check:
 			int mod = board.currentMove == 'w' ? -1 : 1;
 			List<MoveTupel> Moves = this.constructPossibleMoves(board, p, mod);
 			for (MoveTupel move: Moves) {
@@ -139,6 +133,8 @@ public class Rules implements Serializable {
 		possibleMoves.addAll(this.getRetreatMoves(board, p, mod));
 		possibleMoves.addAll(this.getCannonFrontalMoves(board, p, mod));
 		possibleMoves.addAll(this.getCannonRetreatMoves(board, p, mod));
+		possibleMoves.addAll(this.getCannonDiagonalMoves(board, p, mod));
+		possibleMoves.addAll(this.getCannonSideMoves(board, p, mod));
 		return possibleMoves;
 	}
 	public List<MoveTupel> getFrontalMoves(CannonBoard board, BoardPiece p, int mod) {
@@ -215,8 +211,8 @@ public class Rules implements Serializable {
 		char x = p.square.x;
 		int y = p.square.y;
 		char positionx1 = this.getKey(this.letter.get(x));
-		char positionx2 = this.getKey(this.letter.get(x-mod));
-		char positionx3 = this.getKey(this.letter.get(x+mod));
+		char positionx2 = this.getKey(this.letter.get(x-mod)); //TODO: KORREKTIEREN!
+		char positionx3 = this.getKey(this.letter.get(x+mod)); //TODO: KORREKTIEREN!
 		int positiony = y-mod;
 		for(int i = 0; i>3*mod ;i=i+mod){
 			
@@ -236,8 +232,10 @@ public class Rules implements Serializable {
 	public List<MoveTupel> getCannonFrontalMoves(CannonBoard board, BoardPiece p, int mod) {
 		List<MoveTupel> possibleMoves = new LinkedList<MoveTupel>();
 		if (this.isCannone(board, p)) {
-			possibleMoves.addAll(c);
-			possibleMoves.addAll(c);
+			possibleMoves.addAll(this.getCannonFrontalShoot(board, p, mod));
+			
+			
+			
 		}
 		return possibleMoves;
 	}
@@ -249,10 +247,46 @@ public class Rules implements Serializable {
 		}
 		return possibleMoves;
 	}
+	public List<MoveTupel> getCannonDiagonalMoves(CannonBoard board, BoardPiece p, int mod) {
+		List<MoveTupel> possibleMoves = new LinkedList<MoveTupel>();
+		if (this.isCannone(board, p)) {
+			possibleMoves.addAll(c);
+			possibleMoves.addAll(c);
+		}
+		return possibleMoves;
+	}
+	public List<MoveTupel> getCannonSideMoves(CannonBoard board, BoardPiece p, int mod) {
+		List<MoveTupel> possibleMoves = new LinkedList<MoveTupel>();
+		if (this.isCannone(board, p)) {
+			possibleMoves.addAll(c);
+			possibleMoves.addAll(c);
+		}
+		return possibleMoves;
+	}
+	
+	public List<MoveTupel> getCannonFrontalShoot() {
+		return possibleMoves;
+	}
 	
 	
-	public boolean isCannone(CannonBoard board, BoardPiece p) {
-		return false;
+	public List<String> isInCannon(CannonBoard board, BoardPiece p, int mod) {
+		List<String> kind = new LinkedList<String>();
+		char x = p.square.x;
+		int y = p.square.y;
+		/*Forward*/ if (board.squares.get(x)[y+2*mod].piece.name == p.name && board.squares.get(x)[y+mod].piece.name == p.name) {
+			kind.add("Forward");
+		}
+		/*Back*/ if (board.squares.get(x)[y-2*mod].piece.name == p.name && board.squares.get(x)[y-mod].piece.name == p.name) {
+			kind.add("Back");
+		}
+		/*DiagonalRightFront*/ if (board.squares.get(x)[y-2*mod].piece.name == p.name && board.squares.get(x)[y-mod].piece.name == p.name) {
+			kind.add("DiagonalRightFront");
+		}
+		/*DiagonalRightBack*/ if (board.squares.get(this.getKey(this.letter.get(x)))[y-2*mod].piece.name == p.name && board.squares.get(x)[y-mod].piece.name == p.name) {
+			kind.add("DiagonalRightFront");
+		}
+		/*DiagonalLeftFront*/ if (board.squares.get()[])
+		return kind;
 	}
 	/*
 	public boolean CannonCanShoot() {
