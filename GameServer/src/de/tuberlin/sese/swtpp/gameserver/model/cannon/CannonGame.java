@@ -1,6 +1,8 @@
 package de.tuberlin.sese.swtpp.gameserver.model.cannon;
 
 import java.io.Serializable;
+import java.util.LinkedList;
+import java.util.List;
 
 import de.tuberlin.sese.swtpp.gameserver.model.Game;
 import de.tuberlin.sese.swtpp.gameserver.model.Move;
@@ -52,6 +54,8 @@ public class CannonGame extends Game implements Serializable{
 		this.setBoard("/1w1w1w1w1w/1w1w1w1w1w/1w1w1w1w1w///b1b1b1b1b1/b1b1b1b1b1/b1b1b1b1b1/ w");
 		this.Board.currentMove = 'w';
 		this.setNextPlayer(whitePlayer);
+		List<Move> history = new LinkedList<Move>();
+		this.setHistory(history);
 	}
 	
 	/*******************************************
