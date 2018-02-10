@@ -169,13 +169,13 @@ public class Rules implements Serializable {
 		int y = p.square.y;
 		/*(4)*/ char position4x = this.getKey(this.letter.get(x)-mod);
 				int position4y = y;
-				if (position4x != '0' && position4y>0 && position4y<9 && board.squares.get(position4x)[position4y].piece.name != p.name && board.squares.get(position4x)[position4y].piece != null) {
+				if (position4x != '0' && position4y>=0 && position4y<=9 && board.squares.get(position4x)[position4y].piece.name != p.name && board.squares.get(position4x)[position4y].piece != null) {
 					MoveTupel e4 = new MoveTupel(x, y, position4x, position4y);
 					possibleMoves.add(e4);
 				}
 		/*(5)*/ char position5x = this.getKey(this.letter.get(x)+mod);
 				int position5y = y;
-				if (position5x != '0' && position5y>0 && position5y<9 && board.squares.get(position5x)[position5y].piece.name != p.name && board.squares.get(position5x)[position5y].piece != null) {
+				if (position5x != '0' && position5y>=0 && position5y<=9 && board.squares.get(position5x)[position5y].piece.name != p.name && board.squares.get(position5x)[position5y].piece != null) {
 					MoveTupel e5 = new MoveTupel(x, y, position5x, position5y);
 					possibleMoves.add(e5);
 				}
@@ -186,23 +186,23 @@ public class Rules implements Serializable {
 		List<MoveTupel> possibleMoves = new LinkedList<MoveTupel>();
 		char x = p.square.x;
 		int y = p.square.y;
-		char position6x = this.getKey(this.letter.get(x-(2*mod)));
+		char position6x = this.getKey(this.letter.get(x)-(2*mod));
 		int position6y = y-(2*mod);
-		char position6x1 = this.getKey(this.letter.get(x-(mod)));
-				if (menace(board, p, mod) && position6x != '0' && position6y>0 && position6y<9 && board.squares.get(position6x)[position6y].piece == null && board.squares.get(position6x1)[position6y+mod].piece == null) {
+		char position6x1 = this.getKey(this.letter.get(x)-(mod));
+				if (menace(board, p, mod) && position6x != '0' && position6y>=0 && position6y<=9 && board.squares.get(position6x)[position6y].piece == null && board.squares.get(position6x1)[position6y+mod].piece == null) {
 					MoveTupel e = new MoveTupel(x, y, position6x, position6y);
 					possibleMoves.add(e);
 				}
 		char position7x = this.getKey(this.letter.get(x));
 		int position7y = y-(2*mod);
-				if (menace(board, p, mod) && position7x != '0' && position7y>0 && position7y<9 && board.squares.get(position7x)[position7y].piece == null && board.squares.get(position7x)[position7y+mod].piece == null) {
+				if (menace(board, p, mod) && position7x != '0' && position7y>=0 && position7y<=9 && board.squares.get(position7x)[position7y].piece == null && board.squares.get(position7x)[position7y+mod].piece == null) {
 					MoveTupel e = new MoveTupel(x, y, position7x, position7y);
 					possibleMoves.add(e);
 				}
-		char position8x = this.getKey(this.letter.get(x+(2*mod)));
+		char position8x = this.getKey(this.letter.get(x)+(2*mod));
 		int position8y = y-(2*mod);
-		char position8x1 = this.getKey(this.letter.get(x+(mod)));
-				if (menace(board, p, mod) && position8x != '0' && position8y>0 && position8y<9 && board.squares.get(position8x)[position8y].piece == null && board.squares.get(position8x1)[position8y+mod].piece == null) {
+		char position8x1 = this.getKey(this.letter.get(x)+(mod));
+				if (menace(board, p, mod) && position8x != '0' && position8y>=0 && position8y<=9 && board.squares.get(position8x)[position8y].piece == null && board.squares.get(position8x1)[position8y+mod].piece == null) {
 					MoveTupel e = new MoveTupel(x, y, position8x, position8y);
 					possibleMoves.add(e);
 				}
@@ -213,8 +213,8 @@ public class Rules implements Serializable {
 		char x = p.square.x;
 		int y = p.square.y;
 		char positionx1 = this.getKey(this.letter.get(x));
-		char positionx2 = this.getKey(this.letter.get(x)-mod); //TODO: KORREKTIEREN!
-		char positionx3 = this.getKey(this.letter.get(x)+mod); //TODO: KORREKTIEREN!
+		char positionx2 = this.getKey(this.letter.get(x)-mod); 
+		char positionx3 = this.getKey(this.letter.get(x)+mod); 
 		int positiony = y-mod;
 		for(int i = 0; i>3*mod ;i=i+mod){
 			
