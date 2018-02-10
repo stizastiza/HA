@@ -25,25 +25,8 @@ public class CannonBoard implements Serializable {
 	 */
 	
 	public CannonBoard() {
-		//TODO: i don't need a constructor - it could be shorter here
-		//TODO: move constructor code to class declarations and members, because constructor is also a method
-		//TODO: and it`s count of lines is also limited
 		this.pieces = new LinkedList<BoardPiece>();
-		
-		this.signMap = new HashMap<Character, Integer>();
-		this.signMap.put('a', 0);
-		this.signMap.put('b', 1);
-		this.signMap.put('c', 2);
-		this.signMap.put('d', 3);
-		this.signMap.put('e', 4);
-		this.signMap.put('f', 5);
-		this.signMap.put('g', 6);
-		this.signMap.put('h', 7);
-		this.signMap.put('i', 8);
-		this.signMap.put('j', 9);
-		
 		this.squares = new HashMap<Character, BoardSquare[]>();
-		// TODO: make shorter with for (each)
 		this.squares.put('a', new BoardSquare[10]);
 		this.squares.put('b', new BoardSquare[10]);
 		this.squares.put('c', new BoardSquare[10]);
@@ -139,7 +122,7 @@ public class CannonBoard implements Serializable {
 				FEN += '/';
 			}
 		}
-		FEN += " "+this.currentMove;
+		//FEN += " "+this.currentMove;
 		return FEN;
 	}
 	
@@ -148,12 +131,20 @@ public class CannonBoard implements Serializable {
 	 */
 	public void loadFEN(String FEN) {
 		this.setBoardFree();
-		String[] FENArray = FEN.split(" ");
-		String[] boardArray = FENArray[0].split("/");
+		String[] boardArray = FEN.split("/");
+	    String[] actBoardArray = new String[10];
+	    for (int i = 0; i<=8; i++) {
+	        actBoardArray[i] = boardArray[i];
+	    }
+	    if (boardArray.length < 10) {
+	        actBoardArray[9] = "";
+	    } else {
+	        actBoardArray[9] = boardArray[9];
+	    }
 		for (int lines = 0; lines <= 9; lines++) {
 			// TODO: take a look if i should mirror a line (i take here from the first line before slash,
 			// TODO: but the first line after slash is actually a tenth line
-			String line = boardArray[lines];
+			String line = actBoardArray[lines];
 			int colsY = 0;
 			// TODO: if line.lentgh = 0
 			for (int cols=1; cols<=line.length(); cols++) {
@@ -165,12 +156,11 @@ public class CannonBoard implements Serializable {
 				}
 				char name = letter == 'w' ? 'w' : letter == 'W' ? 'W' : letter == 'b' ? 'b' : letter == 'B' ? 'B' : null;
 				char x = this.signs[colsY];
-				int y = this.digits[lines];
+				int y = this.digits[9-lines];
 				this.addPiece(name, x, y);
 				colsY++;
 			}
 		}
-		this.currentMove = FENArray[1].equals("b") ? 'b' : 'w';
 	}
 	
 	/**
