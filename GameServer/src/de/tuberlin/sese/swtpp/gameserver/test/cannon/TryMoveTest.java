@@ -139,9 +139,9 @@ public class TryMoveTest {
 	}
 	@Test 
 	public void retreatSoldier() {
-		startGame("5W4///3b6/3w6//b1b1b1b1b1/b1b1b1b1b1/b1b1b1b1b1/3B6",false);
-		assertMove("d4-b4",false,true); //retreat funktioniert nicht
-		assertGameState("5W4/3b6///3w6//b1b1b1b1b1/b1b1b1b1b1/b1b1b1b1b1/3B6",true,false,false);
+		startGame("5W4///3w6/3b6//b1b1b1b1b1/b1b1b1b1b1/b1b1b1b1b1/3B6",true);
+		assertMove("d6-d8",true,true); 
+		assertGameState("5W4/3w6///3b6//b1b1b1b1b1/b1b1b1b1b1/b1b1b1b1b1/3B6",false,false,false);
 	}
 	@Test 
 	public void captureActualSoldier() {
@@ -253,8 +253,11 @@ public class TryMoveTest {
 	}
 	
 	// Diagonal left back shoot and diagonal right back shoot
+	@Test
 	
-
+	
+	
+	@Test
 	public void sideMoveCannonRight() {
 		startGame("5W4/3www4/////b1b1b1b1b1/b1b1b1b1b1/b1b1b1b1b1/3B6", true);
 		assertMove("d8-g8", true, true);
@@ -267,10 +270,10 @@ public class TryMoveTest {
 		assertGameState("5W4/2www5/////b1b1b1b1b1/b1b1b1b1b1/b1b1b1b1b1/3B6", false,false,false);
 	}
 	@Test
-	public void sideShootCannon() {
-		startGame("5W4/1w8/1w8/1w8//1b8/bbb1b1b1b1/b1b1b1b1b1/b1b1b1b1b1/3B6", true);
-		assertMove("b8-b3", true, true);
-		assertGameState("5W4/1w8/1w8/1w8//1b8/b1b1b1b1b1/b1b1b1b1b1/b1b1b1b1b1/3B6", false,false,false);
+	public void sideShootCannonRight() {
+		startGame("5W4////////2bbb1w3/3B6", false);
+		assertMove("c2-g2", false, true);
+		assertGameState("5W4////////2bbb5/3B6", true,false,false);
 	}
 	@Test
 	public void blackMovesWhite() {
@@ -284,6 +287,7 @@ public class TryMoveTest {
 		assertMove("b8-b3", false, false);
 		assertGameState("5W4/1w8/1w8/1w8//////3B6", false,false,false);
 	}
+	
 
 	
 }
