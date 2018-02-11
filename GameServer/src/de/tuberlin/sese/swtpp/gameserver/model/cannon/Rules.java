@@ -77,6 +77,7 @@ public class Rules implements Serializable {
 		}
 		MoveTupel t = new MoveTupel(Positions[0], Character.getNumericValue(Positions[1]), Positions[3], Character.getNumericValue(Positions[4]));
 		for (MoveTupel k: this.getLegalMoves(board)) {
+			System.out.println(""+k.fromX+k.fromY+'-'+k.toX+k.toY);
 			if (k.equals(t)) {
 				return true;
 			}
@@ -100,10 +101,12 @@ public class Rules implements Serializable {
 				continue;
 			}
 			int mod = board.currentMove == 'w' ? -1 : 1;
-			List<MoveTupel> Moves = this.constructPossibleMoves(board, p, mod);
-			for (MoveTupel move: Moves) {
-				if (move != null) {
-					result.add(move);
+			if (p != null && p.square != null) {
+				List<MoveTupel> Moves = this.constructPossibleMoves(board, p, mod);
+				for (MoveTupel move: Moves) {
+					if (move != null) {
+						result.add(move);
+					}
 				}
 			}
 		}
@@ -143,7 +146,6 @@ public class Rules implements Serializable {
 	}
 	public List<MoveTupel> getFrontalMoves(CannonBoard board, BoardPiece p, int mod) {
 		List<MoveTupel> possibleMoves = new LinkedList<MoveTupel>();
-		if (p != null && this.PositionExists(p.square.x, p.square.y)) {
 		char x = p.square.x;
 		int y = p.square.y;
 		/*(1)*/ char position1x = this.getKey(this.letter.get(x)-mod);
@@ -164,7 +166,6 @@ public class Rules implements Serializable {
 					MoveTupel c = new MoveTupel(x, y, position3x, position3y);
 					possibleMoves.add(c);
 				}
-		}
 		return possibleMoves;
 	}
 	public boolean PositionExists(char x, int y) {
@@ -443,7 +444,7 @@ public class Rules implements Serializable {
 		char x = p.square.x;
 		int y = p.square.y;
 		char position1x = this.getKey(this.letter.get(x)-3*mod); 
-		int position1y = y-3*mod;
+		int position1y = y+3*mod;
 		if (position1x != '0' && position1y>=0 && position1y<=9 && board.squares.get(position1x)[position1y].piece == null) {
 			MoveTupel a = new MoveTupel(x, y, position1x, position1y);
 			possibleMoves.add(a);
@@ -455,11 +456,11 @@ public class Rules implements Serializable {
 		char x = p.square.x;
 		int y = p.square.y;
 		char positionBx = this.getKey(this.letter.get(x)-3*mod); 
-		int positionBy = y-3*mod;
+		int positionBy = y+3*mod;
 		char position1x = this.getKey(this.letter.get(x)-4*mod); 
-		int position1y = y-4*mod;
+		int position1y = y+4*mod;
 		char position2x = this.getKey(this.letter.get(x)-5*mod); 
-		int position2y = y-5*mod;
+		int position2y = y+5*mod;
 		if (position1x != '0' && position1y>=0 && position1y<=9 && board.squares.get(positionBx)[positionBy].piece == null && this.EnemyAtPosition(board, p, position1x, position1y)) {
 			MoveTupel a = new MoveTupel(x, y, position1x, position1y);
 			possibleMoves.add(a);

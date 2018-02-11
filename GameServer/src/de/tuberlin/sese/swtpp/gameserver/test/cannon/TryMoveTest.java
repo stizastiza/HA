@@ -104,6 +104,7 @@ public class TryMoveTest {
 		assertMove("b8-b5",true,true);
 		assertGameState("4W5/3w1w1w1w/1w1w1w1w1w/1w1w1w1w1w/1w8//b1b1b1b1b1/b1b1b1b1b1/b1b1b1b1b1/4B5",false,false,false);
 	}
+<<<<<<< HEAD
 
 	//TODO: implement test cases of same kind as example here
 	@Test
@@ -189,5 +190,24 @@ public class TryMoveTest {
 		startGame("/1w1w1w1w1w/1w1w1w1w1w/1w1w1w1w1w///b1b1b1b1b1/b1b1b1b1b1/b1b1b1b1b1/",true);
 		assertMove("b0-b0",true,true); //city placen überprüfen
 		assertGameState("1W8/1w1w1w1w1w/1w1w1w1w1w/1w1w1w1w1w/10/10/b1b1b1b1b1/b1b1b1b1b1/b1b1b1b1b1/10",false,false,false);
+=======
+	@Test
+	public void CannonShootFalse() {
+		startGame("4W5/1w1w1w1w1w/1w1w1w1w1w/1w1w1w1w1w///b1b1b1b1b1/b1b1b1b1b1/b1b1b1b1b1/4B5",true);
+		assertMove("b8-b3",true,false);
+		assertGameState("4W5/1w1w1w1w1w/1w1w1w1w1w/1w1w1w1w1w///b1b1b1b1b1/b1b1b1b1b1/b1b1b1b1b1/4B5",true,false,false);
+	}
+	@Test
+	public void CannonShoot() {
+		startGame("4W5/1w1w1w1w1w/1w1w1w1w1w/1w1w1w1w1w///1bb1b1b1b1/b1b1b1b1b1/b1b1b1b1b1/4B5",true);
+		assertMove("b8-b3",true,true);
+		assertGameState("4W5/1w1w1w1w1w/1w1w1w1w1w/1w1w1w1w1w///2b1b1b1b1/b1b1b1b1b1/b1b1b1b1b1/4B5",false,false,false);
+	}
+	@Test
+	public void DiagonalMoveCannon() {
+		startGame("5W4/1w8/2w7/3w6///b1b1b1b1b1/b1b1b1b1b1/b1b1b1b1b1/3B6", true);
+		assertMove("b8-e5", true, true);
+		assertGameState("5W4//2w7/3w6/4w5//b1b1b1b1b1/b1b1b1b1b1/b1b1b1b1b1/3B6", false,false,false);
+>>>>>>> bfc1ab341342b15f57dae347bdadc6f7321122aa
 	}
 }
