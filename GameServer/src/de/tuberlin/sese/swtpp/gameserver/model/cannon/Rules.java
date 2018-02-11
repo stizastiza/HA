@@ -444,7 +444,7 @@ public class Rules implements Serializable {
 		char x = p.square.x;
 		int y = p.square.y;
 		char position1x = this.getKey(this.letter.get(x)-3*mod); 
-		int position1y = y-3*mod;
+		int position1y = y+3*mod;
 		if (position1x != '0' && position1y>=0 && position1y<=9 && board.squares.get(position1x)[position1y].piece == null) {
 			MoveTupel a = new MoveTupel(x, y, position1x, position1y);
 			possibleMoves.add(a);
@@ -456,11 +456,11 @@ public class Rules implements Serializable {
 		char x = p.square.x;
 		int y = p.square.y;
 		char positionBx = this.getKey(this.letter.get(x)-3*mod); 
-		int positionBy = y-3*mod;
+		int positionBy = y+3*mod;
 		char position1x = this.getKey(this.letter.get(x)-4*mod); 
-		int position1y = y-4*mod;
+		int position1y = y+4*mod;
 		char position2x = this.getKey(this.letter.get(x)-5*mod); 
-		int position2y = y-5*mod;
+		int position2y = y+5*mod;
 		if (position1x != '0' && position1y>=0 && position1y<=9 && board.squares.get(positionBx)[positionBy].piece == null && this.EnemyAtPosition(board, p, position1x, position1y)) {
 			MoveTupel a = new MoveTupel(x, y, position1x, position1y);
 			possibleMoves.add(a);
