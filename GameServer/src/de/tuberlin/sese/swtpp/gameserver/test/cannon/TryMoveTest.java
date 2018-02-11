@@ -75,14 +75,34 @@ public class TryMoveTest {
 	public void firstTest() {
 		startGame("/1w1w1w1w1w/1w1w1w1w1w/1w1w1w1w1w///b1b1b1b1b1/b1b1b1b1b1/b1b1b1b1b1/",true);
 		assertMove("a9-a9",true,false);
-		assertMove("a8-a8",true,true);
-		assertGameState("1W8/1w1w1w1w1w/1w1w1w1w1w/1w1w1w1w1w///b1b1b1b1b1/b1b1b1b1b1/b1b1b1b1b1/", false,false,false);
+		assertGameState("/1w1w1w1w1w/1w1w1w1w1w/1w1w1w1w1w///b1b1b1b1b1/b1b1b1b1b1/b1b1b1b1b1/", true, false, false);
 	}
 	@Test
 	public void secondTest() {
 		startGame("1W8/1w1w1w1w1w/1w1w1w1w1w/1w1w1w1w1w///b1b1b1b1b1/b1b1b1b1b1/b1b1b1b1b1/8B1",true);
 		assertMove("f6-f5",true,true);
 		assertGameState("1W8/1w1w1w1w1w/1w1w1w1w1w/1w1w3w1w/5w4//b1b1b1b1b1/b1b1b1b1b1/b1b1b1b1b1/8B1",false,false,false);
+	}
+	@Test
+	public void thirdTest() {
+		startGame("/1w1w1w1w1w/1w1w1w1w1w/1w1w1w1w1w///b1b1b1b1b1/b1b1b1b1b1/b1b1b1b1b1/",true);
+		assertMove("b9-b9",true,true);
+		assertGameState("1W8/1w1w1w1w1w/1w1w1w1w1w/1w1w1w1w1w///b1b1b1b1b1/b1b1b1b1b1/b1b1b1b1b1/", false,false,false);
+	}
+	@Test
+	public void fourthTest() {
+		startGame("/1w1w1w1w1w/1w1w1w1w1w/1w1w1w1w1w///b1b1b1b1b1/b1b1b1b1b1/b1b1b1b1b1/",true);
+		assertMove("a9-a9",true,false);
+		assertMove("e9-e9",true,true);
+		assertGameState("4W5/1w1w1w1w1w/1w1w1w1w1w/1w1w1w1w1w///b1b1b1b1b1/b1b1b1b1b1/b1b1b1b1b1/", false,false,false);
+		assertMove("e0-e0",false,true);
+		assertGameState("4W5/1w1w1w1w1w/1w1w1w1w1w/1w1w1w1w1w///b1b1b1b1b1/b1b1b1b1b1/b1b1b1b1b1/4B5", true,false,false);
+	}
+	@Test
+	public void fifthTest() {
+		startGame("4W5/1w1w1w1w1w/1w1w1w1w1w/1w1w1w1w1w///b1b1b1b1b1/b1b1b1b1b1/b1b1b1b1b1/4B5",true);
+		assertMove("b8-b5",true,true);
+		assertGameState("4W5/3w1w1w1w/1w1w1w1w1w/1w1w1w1w1w/1w8//b1b1b1b1b1/b1b1b1b1b1/b1b1b1b1b1/4B5",false,false,false);
 	}
 
 	//TODO: implement test cases of same kind as example here
