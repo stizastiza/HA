@@ -580,22 +580,7 @@ public class Rules implements Serializable {
 	}
 	
 	// Coordination:
-	public boolean contains(int[] arr, int item) {
-		      for (int n : arr) {
-		         if (item == n) {
-		            return true;
-		         }
-		      }
-		      return false;
-		   }
-	 public boolean contains(char[] arr, char item) {
-		      for (char n : arr) {
-		         if (item == n) {
-		            return true;
-		         }
-		      }
-		      return false;
-		   }
+
 	 public char getKey(int value) {
 		 for (char i: this.letter.keySet()) {
 			 if (this.letter.get(i) == value) {

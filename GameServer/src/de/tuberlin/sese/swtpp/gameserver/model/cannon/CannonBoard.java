@@ -61,30 +61,6 @@ public class CannonBoard implements Serializable {
 		this.squares.get(x)[y].piece = newPiece;
 	}
 	
-	public List<Integer> getPiece(char name, char x, int y) {
-		List<Integer> result = new LinkedList<Integer>();
-		for(int i=0 ; i<this.pieces.size() ; i++) {
-			if(this.pieces.get(i).name == name
-					&& this.pieces.get(i).square != null 
-					&& ((x!=0 && this.pieces.get(i).square.x==x) || x==0) 
-					&& ((y!=-1 && this.pieces.get(i).square.y==y) || y==-1)) {
-				result.add(i);
-			}
-		}
-		return result;
-	}
-	
-	/**
-	 * Switches the current move
-	 */
-	public void switchMove() {
-		if(this.currentMove == 'w') {
-			this.currentMove = 'b';
-		} else {
-			this.currentMove = 'w';
-		}
-	}
-	
 	public void makeMove(String MoveString) {
 		this.parseLocalString(MoveString);
 		if (this.cityMove) {
@@ -109,7 +85,6 @@ public class CannonBoard implements Serializable {
 		this.squares.get(this.fromX)[this.fromY].piece = null;
 		
 		}
-		//this.switchMove();
 	}
 	public void makeMoveCity() {
 		BoardPiece City = new BoardPiece(Character.toUpperCase(this.currentMove));

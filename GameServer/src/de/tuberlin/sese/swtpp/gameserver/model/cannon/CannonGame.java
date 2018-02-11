@@ -247,9 +247,9 @@ public class CannonGame extends Game implements Serializable{
 	@Override
 	public boolean tryMove(String moveString, Player player) {
 		//game.status != finished // DO I HAVE ANY LEGAL MOVES?
-		if (this.getStatus().equals("Finished")) {
+/*		if (this.getStatus().equals("Finished")) {
 			return false;
-		}
+		}*/
 		if (this.getNextPlayer() != player) {
 			return false;
 		}
