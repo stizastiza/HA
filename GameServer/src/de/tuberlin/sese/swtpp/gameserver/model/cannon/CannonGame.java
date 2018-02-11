@@ -253,22 +253,19 @@ public class CannonGame extends Game implements Serializable{
 		if (this.getStatus().equals("Finished")) {
 			return false;
 		}
-		// is it done by the right player?
-		if (this.getNextPlayer() != player) {
-			return false;
-		}
+		//if (this.getNextPlayer() != player) {
+			//return false;
+		//}
 		// IT HAS TO BE CHECKED IF THE MOVE CAN BE PERFORMED:
-		if (!this.rules.MoveParser(this.Board, moveString, this.getMoveCount())) {
+		if (!this.rules.MoveParser(this.Board, moveString)) {
 			return false;
 		}
 		String BackUp = this.getBoard();
 		this.Board.makeMove(moveString);
+		this.updateNext();
 		// TODO: update history (add move to history)
 		Move e = new Move(moveString, BackUp, player);
 		this.history.add(e);
-		// TODO: set next player.
-		this.updateNext();
-		this.Board.switchMove();
 		char c = player == this.blackPlayer ? 'w' : 'b';
 		if (this.rules.GameOver(this.Board, c, BackUp)) {
 			this.finish(player);

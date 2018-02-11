@@ -15,4 +15,10 @@ public class MoveTupel implements Serializable {
 		this.toX = toX;
 		this.toY = toY;
 	}
+	public boolean equals(MoveTupel another) {
+		if (another.fromX == this.fromX && another.fromY == this.fromY && another.toX == this.toX && another.toY == this.toY) {
+			return true;
+		}
+		return false;
+	}
 }

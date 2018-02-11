@@ -89,15 +89,12 @@ public class CannonBoard implements Serializable {
 		this.parseLocalString(MoveString);
 		if (this.cityMove) {
 			this.makeMoveCity();
-			return;
 		}
 		else if (this.cannonMove) {
 			this.makeMoveCannon();
-			return;
 		}
 		else if (this.cannonShoot) {
 			this.cannonShoot();
-			return;
 		} else {
 		BoardPiece previousPiece = this.squares.get(this.fromX)[this.fromY].piece;
 		previousPiece.square = this.squares.get(this.toX)[this.toY];
@@ -109,6 +106,7 @@ public class CannonBoard implements Serializable {
 		this.squares.get(this.toX)[this.toY].piece = previousPiece;
 		this.squares.get(this.fromX)[this.fromY].piece = null;
 		}
+		this.switchMove();
 	}
 	public void makeMoveCity() {
 		BoardPiece City = new BoardPiece(Character.toUpperCase(this.currentMove));
@@ -171,9 +169,9 @@ public class CannonBoard implements Serializable {
 					emptyCounter++;
 				}	
 			}
-			while (emptyCounter != 0) {
-				FEN += 1;
-				emptyCounter--;
+			if (emptyCounter != 0) {
+				FEN += emptyCounter;
+				emptyCounter = 0;
 			}
 			if (num != 0) {
 				FEN += '/';
@@ -188,7 +186,8 @@ public class CannonBoard implements Serializable {
 	 */
 	public void loadFEN(String FEN) {
 		this.setBoardFree();
-		String[] boardArray = FEN.split("/");
+		String[] parts = FEN.split(" ");
+		String[] boardArray = parts[0].split("/");
 	    String[] actBoardArray = new String[10];
 	    for (int i = 0; i<=8; i++) {
 	        actBoardArray[i] = boardArray[i];
