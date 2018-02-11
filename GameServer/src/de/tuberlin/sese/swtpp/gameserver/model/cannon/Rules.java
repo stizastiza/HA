@@ -77,6 +77,7 @@ public class Rules implements Serializable {
 		}
 		MoveTupel t = new MoveTupel(Positions[0], Character.getNumericValue(Positions[1]), Positions[3], Character.getNumericValue(Positions[4]));
 		for (MoveTupel k: this.getLegalMoves(board)) {
+			System.out.println(""+k.fromX+k.fromY+'-'+k.toX+k.toY);
 			if (k.equals(t)) {
 				return true;
 			}

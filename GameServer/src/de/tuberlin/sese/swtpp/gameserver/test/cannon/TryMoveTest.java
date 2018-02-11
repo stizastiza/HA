@@ -116,4 +116,10 @@ public class TryMoveTest {
 		assertMove("b8-b3",true,true);
 		assertGameState("4W5/1w1w1w1w1w/1w1w1w1w1w/1w1w1w1w1w///2b1b1b1b1/b1b1b1b1b1/b1b1b1b1b1/4B5",false,false,false);
 	}
+	@Test
+	public void DiagonalMoveCannon() {
+		startGame("5W4/1w8/2w7/3w6///b1b1b1b1b1/b1b1b1b1b1/b1b1b1b1b1/3B6", true);
+		assertMove("b8-e5", true, true);
+		assertGameState("5W4//2w7/3w6/4w5//b1b1b1b1b1/b1b1b1b1b1/b1b1b1b1b1b1/3B6", false,false,false);
+	}
 }
