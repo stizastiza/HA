@@ -116,31 +116,4 @@ public class TryMoveTest {
 		assertMove("b8-b3",true,true);
 		assertGameState("4W5/1w1w1w1w1w/1w1w1w1w1w/1w1w1w1w1w///2b1b1b1b1/b1b1b1b1b1/b1b1b1b1b1/4B5",false,false,false);
 	}
-
-	//TODO: implement test cases of same kind as example here
-	public void winWhiteTest() {
-		startGame("5W4/1w1w1w1w1w/1w1w1w1w1w/1w3w1w1w/2w7//b1b3b1b1/b1b1b1b1b1/b1b1b1wbb1/3B6",true);
-		assertMove("i4-j4",true,true);
-		assertGameState("5W4/1w1w1w1w1w/1w1w1w1w1w/1w3w3w/2w4w2/5b4/b1b3b1b1/b1b1b1b1b1/b1b1b1b1b1/3B6",false,true,true);
-	}	
-	public void moveOnOwnPieceTest() {
-		startGame("5W4/1w1w1w1w1w/1w1w1w1w1w/1w3w1w1w/2w7/2w7/b1b3b1b1/b1b1b1b1b1/b1b1b1b1b1/3B6",true);
-		assertMove("e3-f3",true,false);
-		assertGameState("5W4/1w1w1w1w1w/1w1w1w1w1w/1w3w1w1w/2w7/2w7/b1b3b1b1/b1b1b1b1b1/b1b1b1b1b1/3B6",false,false,false);
-	}
-	public void cannonShotBlockedTest() {
-		startGame("5W4/1w1w1w1w1w/1w1w1w1w1w/1w3w1w1w/1ww7/1b8/b1b3b1b1/b1b1b1b1b1/b1b1b1b1b1/3B6",true);
-		assertMove("b2-f2",true,false);
-		assertGameState("5W4/1w1w1w1w1w/1w1w1w1w1w/1w3w1w1w/1ww7/1b8/b1b3b1b1/b1b1b1b1b1/b1b1b1b1b1/3B6",false,false,false);
-	}
-	public void cannonMoveTest() {
-		startGame("5W4/1w1w1w1w1w/1w1w1w1w1w/1w1w1w1w1w///b1b1b1b1b1/b1b1b1b1b1/b1b1b1b1b1/3B6",true);
-		assertMove("b2-e2",true,true);
-		assertGameState("5W4/111w1w1w1w/1w1w1w1w1w/1w1w1w1w1w/1w8//b1b1b1b1b1/b1b1b1b1b1/b1b1b1b1b1/3B6",false,false,false);
-	}
-	public void cannonShootTest() {
-		startGame("5W4/1w1w1w1w1w/1w1w1w1w1w/1w1w1w1w1w///1bb1b1b1b1/b1b1b1b1b1/b1b1b1b1b1/3B6",true);
-		assertMove("b2-g2",true,true);
-		assertGameState("5W4/1w1w1w1w1w/1w1w1w1w1w/1w1w1w1w1w///11b1b1b1b1/b1b1b1b1b1/b1b1b1b1b1/3B6",false,false,false);
-	}
 }
