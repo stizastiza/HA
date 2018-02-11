@@ -169,13 +169,13 @@ public class Rules implements Serializable {
 		int y = p.square.y;
 		/*(4)*/ char position4x = this.getKey(this.letter.get(x)-mod);
 				int position4y = y;
-				if (position4x != '0' && position4y>=0 && position4y<=9 && board.squares.get(position4x)[position4y].piece.name != p.name && board.squares.get(position4x)[position4y].piece != null) {
+				if (position4x != '0' && position4y>=0 && position4y<=9 && board.squares.get(position4x)[position4y].piece.name != p.name && board.squares.get(position4x)[position4y].piece != null && board.squares.get(position4x)[position4y].piece.name != Character.toUpperCase(board.currentMove)) {
 					MoveTupel e4 = new MoveTupel(x, y, position4x, position4y);
 					possibleMoves.add(e4);
 				}
 		/*(5)*/ char position5x = this.getKey(this.letter.get(x)+mod);
 				int position5y = y;
-				if (position5x != '0' && position5y>=0 && position5y<=9 && board.squares.get(position5x)[position5y].piece.name != p.name && board.squares.get(position5x)[position5y].piece != null) {
+				if (position5x != '0' && position5y>=0 && position5y<=9 && board.squares.get(position5x)[position5y].piece.name != p.name && board.squares.get(position5x)[position5y].piece != null && board.squares.get(position5x)[position5y].piece.name != Character.toUpperCase(board.currentMove)) {
 					MoveTupel e5 = new MoveTupel(x, y, position5x, position5y);
 					possibleMoves.add(e5);
 				}
@@ -308,11 +308,11 @@ public class Rules implements Serializable {
 		int blockPosition = y+3*mod;
 		int position1y = y+4*mod;
 		int position2y = y+5*mod;
-		if (position1y>=0 && position1y<=9 && board.squares.get(x)[blockPosition].piece == null && board.squares.get(x)[position1y].piece != null && board.squares.get(x)[position1y].piece.name != p.name) {
+		if (position1y>=0 && position1y<=9 && board.squares.get(x)[blockPosition].piece == null && board.squares.get(x)[position1y].piece != null && board.squares.get(x)[position1y].piece.name != p.name && board.squares.get(x)[position1y].piece.name != Character.toUpperCase(board.currentMove)) {
 			MoveTupel a = new MoveTupel(x, y, x, position1y);
 			possibleMoves.add(a);
 		}
-		if (position2y>=0 && position2y<=9 && board.squares.get(x)[blockPosition].piece == null && board.squares.get(x)[position2y].piece.name != p.name) {
+		if (position2y>=0 && position2y<=9 && board.squares.get(x)[blockPosition].piece == null && board.squares.get(x)[position2y].piece.name != p.name && board.squares.get(x)[position2y].piece.name != Character.toUpperCase(board.currentMove)) {
 			MoveTupel b = new MoveTupel(x, y, x, position2y);
 			possibleMoves.add(b);
 		}
@@ -325,11 +325,11 @@ public class Rules implements Serializable {
 		int blockPosition = y-3*mod;
 		int position1y = y-4*mod;
 		int position2y = y-5*mod;
-		if (position1y>=0 && position1y<=9 && board.squares.get(x)[blockPosition].piece == null && board.squares.get(x)[position1y].piece.name != p.name) {
+		if (position1y>=0 && position1y<=9 && board.squares.get(x)[blockPosition].piece == null && board.squares.get(x)[position1y].piece.name != p.name && board.squares.get(x)[position1y].piece.name != Character.toUpperCase(board.currentMove)) {
 			MoveTupel a = new MoveTupel(x, y, x, position1y);
 			possibleMoves.add(a);
 		}
-		if (position2y>=0 && position2y<=9 && board.squares.get(x)[blockPosition].piece == null && board.squares.get(x)[position2y].piece.name != p.name) {
+		if (position2y>=0 && position2y<=9 && board.squares.get(x)[blockPosition].piece == null && board.squares.get(x)[position2y].piece.name != p.name && board.squares.get(x)[position2y].piece.name != Character.toUpperCase(board.currentMove)) {
 			MoveTupel b = new MoveTupel(x, y, x, position2y);
 			possibleMoves.add(b);
 		}
@@ -342,11 +342,11 @@ public class Rules implements Serializable {
 		char blockPosition = this.getKey(this.letter.get(x)-3*mod);
 		char position1x = this.getKey(this.letter.get(x)-4*mod);
 		char position2x = this.getKey(this.letter.get(x)-5*mod);
-		if (position1x != '0' && board.squares.get(blockPosition)[y].piece == null && board.squares.get(position1x)[y].piece.name != p.name) {
+		if (position1x != '0' && board.squares.get(blockPosition)[y].piece == null && board.squares.get(position1x)[y].piece.name != p.name && board.squares.get(position1x)[y].piece.name != Character.toUpperCase(board.currentMove)) {
 			MoveTupel a = new MoveTupel(x, y, position1x, y);
 			possibleMoves.add(a);
 		}
-		if (position2x != '0' && board.squares.get(blockPosition)[y].piece == null && board.squares.get(position2x)[y].piece.name != p.name) {
+		if (position2x != '0' && board.squares.get(blockPosition)[y].piece == null && board.squares.get(position2x)[y].piece.name != p.name && board.squares.get(position2x)[y].piece.name != Character.toUpperCase(board.currentMove)) {
 			MoveTupel b = new MoveTupel(x, y, position2x, y);
 			possibleMoves.add(b);
 		}
@@ -359,11 +359,11 @@ public class Rules implements Serializable {
 		char blockPosition = this.getKey(this.letter.get(x)+3*mod);
 		char position1x = this.getKey(this.letter.get(x)+4*mod);
 		char position2x = this.getKey(this.letter.get(x)+5*mod);
-		if (position1x != '0' && board.squares.get(blockPosition)[y].piece == null && board.squares.get(position1x)[y].piece.name != p.name) {
+		if (position1x != '0' && board.squares.get(blockPosition)[y].piece == null && board.squares.get(position1x)[y].piece.name != p.name && board.squares.get(position1x)[y].piece.name != Character.toUpperCase(board.currentMove)) {
 			MoveTupel a = new MoveTupel(x, y, position1x, y);
 			possibleMoves.add(a);
 		}
-		if (position2x != '0' && board.squares.get(blockPosition)[y].piece == null && board.squares.get(position2x)[y].piece.name != p.name) {
+		if (position2x != '0' && board.squares.get(blockPosition)[y].piece == null && board.squares.get(position2x)[y].piece.name != p.name && board.squares.get(position2x)[y].piece.name != Character.toUpperCase(board.currentMove)) {
 			MoveTupel b = new MoveTupel(x, y, position2x, y);
 			possibleMoves.add(b);
 		}
@@ -391,11 +391,11 @@ public class Rules implements Serializable {
 		int position1y = y+4*mod;
 		char position2x = this.getKey(this.letter.get(x)+5*mod); 
 		int position2y = y+5*mod;
-		if (position1x != '0' && position1y>=0 && position1y<=9 && board.squares.get(positionBx)[positionBy].piece == null && board.squares.get(position1x)[position1y].piece != null && board.squares.get(position1x)[position1y].piece.name != p.name) {
+		if (position1x != '0' && position1y>=0 && position1y<=9 && board.squares.get(positionBx)[positionBy].piece == null && board.squares.get(position1x)[position1y].piece != null && board.squares.get(position1x)[position1y].piece.name != p.name && board.squares.get(position1x)[position1y].piece.name != Character.toUpperCase(board.currentMove)) {
 			MoveTupel a = new MoveTupel(x, y, position1x, position1y);
 			possibleMoves.add(a);
 		}
-		if (position2x != '0' && position2y>=0 && position2y<=9 && board.squares.get(positionBx)[positionBy].piece == null && board.squares.get(position2x)[position2y].piece != null && board.squares.get(position2x)[position2y].piece.name != p.name) {
+		if (position2x != '0' && position2y>=0 && position2y<=9 && board.squares.get(positionBx)[positionBy].piece == null && board.squares.get(position2x)[position2y].piece != null && board.squares.get(position2x)[position2y].piece.name != p.name && board.squares.get(position2x)[position2y].piece.name != Character.toUpperCase(board.currentMove)) {
 			MoveTupel b = new MoveTupel(x, y, position2x, position2y);
 			possibleMoves.add(b);
 		}
@@ -423,11 +423,11 @@ public class Rules implements Serializable {
 		int position1y = y-4*mod;
 		char position2x = this.getKey(this.letter.get(x)-5*mod); 
 		int position2y = y-5*mod;
-		if (position1x != '0' && position1y>=0 && position1y<=9 && board.squares.get(positionBx)[positionBy].piece == null && board.squares.get(position1x)[position1y].piece != null && board.squares.get(position1x)[position1y].piece.name != p.name) {
+		if (position1x != '0' && position1y>=0 && position1y<=9 && board.squares.get(positionBx)[positionBy].piece == null && board.squares.get(position1x)[position1y].piece != null && board.squares.get(position1x)[position1y].piece.name != p.name && board.squares.get(position1x)[position1y].piece.name != Character.toUpperCase(board.currentMove)) {
 			MoveTupel a = new MoveTupel(x, y, position1x, position1y);
 			possibleMoves.add(a);
 		}
-		if (position2x != '0' && position2y>=0 && position2y<=9 && board.squares.get(positionBx)[positionBy].piece == null && board.squares.get(position2x)[position2y].piece != null && board.squares.get(position2x)[position2y].piece.name != p.name) {
+		if (position2x != '0' && position2y>=0 && position2y<=9 && board.squares.get(positionBx)[positionBy].piece == null && board.squares.get(position2x)[position2y].piece != null && board.squares.get(position2x)[position2y].piece.name != p.name && board.squares.get(position2x)[position2y].piece.name != Character.toUpperCase(board.currentMove)) {
 			MoveTupel b = new MoveTupel(x, y, position2x, position2y);
 			possibleMoves.add(b);
 		}
@@ -455,11 +455,11 @@ public class Rules implements Serializable {
 		int position1y = y-4*mod;
 		char position2x = this.getKey(this.letter.get(x)-5*mod); 
 		int position2y = y-5*mod;
-		if (position1x != '0' && position1y>=0 && position1y<=9 && board.squares.get(positionBx)[positionBy].piece == null && board.squares.get(position1x)[position1y].piece != null && board.squares.get(position1x)[position1y].piece.name != p.name) {
+		if (position1x != '0' && position1y>=0 && position1y<=9 && board.squares.get(positionBx)[positionBy].piece == null && board.squares.get(position1x)[position1y].piece != null && board.squares.get(position1x)[position1y].piece.name != p.name && board.squares.get(position1x)[position1y].piece.name != Character.toUpperCase(board.currentMove)) {
 			MoveTupel a = new MoveTupel(x, y, position1x, position1y);
 			possibleMoves.add(a);
 		}
-		if (position2x != '0' && position2y>=0 && position2y<=9 && board.squares.get(positionBx)[positionBy].piece == null && board.squares.get(position2x)[position2y].piece != null && board.squares.get(position2x)[position2y].piece.name != p.name) {
+		if (position2x != '0' && position2y>=0 && position2y<=9 && board.squares.get(positionBx)[positionBy].piece == null && board.squares.get(position2x)[position2y].piece != null && board.squares.get(position2x)[position2y].piece.name != p.name && board.squares.get(position2x)[position2y].piece.name != Character.toUpperCase(board.currentMove)) {
 			MoveTupel b = new MoveTupel(x, y, position2x, position2y);
 			possibleMoves.add(b);
 		}
@@ -487,11 +487,11 @@ public class Rules implements Serializable {
 		int position1y = y-4*mod;
 		char position2x = this.getKey(this.letter.get(x)+5*mod); 
 		int position2y = y-5*mod;
-		if (position1x != '0' && position1y>=0 && position1y<=9 && board.squares.get(positionBx)[positionBy].piece == null && board.squares.get(position1x)[position1y].piece != null && board.squares.get(position1x)[position1y].piece.name != p.name) {
+		if (position1x != '0' && position1y>=0 && position1y<=9 && board.squares.get(positionBx)[positionBy].piece == null && board.squares.get(position1x)[position1y].piece != null && board.squares.get(position1x)[position1y].piece.name != p.name && board.squares.get(position1x)[position1y].piece.name != Character.toUpperCase(board.currentMove)) {
 			MoveTupel a = new MoveTupel(x, y, position1x, position1y);
 			possibleMoves.add(a);
 		}
-		if (position2x != '0' && position2y>=0 && position2y<=9 && board.squares.get(positionBx)[positionBy].piece == null && board.squares.get(position2x)[position2y].piece != null && board.squares.get(position2x)[position2y].piece.name != p.name) {
+		if (position2x != '0' && position2y>=0 && position2y<=9 && board.squares.get(positionBx)[positionBy].piece == null && board.squares.get(position2x)[position2y].piece != null && board.squares.get(position2x)[position2y].piece.name != p.name && board.squares.get(position2x)[position2y].piece.name != Character.toUpperCase(board.currentMove)) {
 			MoveTupel b = new MoveTupel(x, y, position2x, position2y);
 			possibleMoves.add(b);
 		}
@@ -530,10 +530,6 @@ public class Rules implements Serializable {
 	//TODO:
 	public boolean GameOver(CannonBoard board, char Player) {
 		
-		return false;
-	}
-	//TODO:
-	public boolean FigureCheck(CannonBoard board, BoardPiece p, int mod) {
 		return false;
 	}
 	

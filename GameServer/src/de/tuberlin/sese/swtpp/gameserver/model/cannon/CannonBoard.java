@@ -199,11 +199,8 @@ public class CannonBoard implements Serializable {
 	        actBoardArray[9] = boardArray[9];
 	    }
 		for (int lines = 0; lines <= 9; lines++) {
-			// TODO: take a look if i should mirror a line (i take here from the first line before slash,
-			// TODO: but the first line after slash is actually a tenth line
 			String line = actBoardArray[lines];
 			int colsY = 0;
-			// TODO: if line.lentgh = 0
 			for (int cols=1; cols<=line.length(); cols++) {
 				char letter = line.charAt(cols-1); // for example (1): cols = 2, letter = 1 or w.
 				// if letter is a digit:
