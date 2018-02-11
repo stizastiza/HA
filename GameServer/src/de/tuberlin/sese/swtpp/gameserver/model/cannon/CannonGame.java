@@ -44,14 +44,11 @@ public class CannonGame extends Game implements Serializable{
 	public CannonGame() {
 		super();
 		// TODO: add further initializations if necessary
-		this.started = true;
 		this.Board = new CannonBoard();
 		this.rules = new Rules();
 		this.setBoard("/1w1w1w1w1w/1w1w1w1w1w/1w1w1w1w1w///b1b1b1b1b1/b1b1b1b1b1/b1b1b1b1b1/ w");
 		this.Board.currentMove = 'w';
-		this.setNextPlayer(whitePlayer);
-		List<Move> history = new LinkedList<Move>();
-		this.setHistory(history);
+		//this.setNextPlayer(whitePlayer);
 	}
 	
 	/*******************************************
@@ -253,19 +250,21 @@ public class CannonGame extends Game implements Serializable{
 		if (this.getStatus().equals("Finished")) {
 			return false;
 		}
-		//if (this.getNextPlayer() != player) {
-			//return false;
-		//}
+		if (this.getNextPlayer() != player) {
+			return false;
+		}
 		// IT HAS TO BE CHECKED IF THE MOVE CAN BE PERFORMED:
 		if (!this.rules.MoveParser(this.Board, moveString)) {
 			return false;
 		}
 		String BackUp = this.getBoard();
 		this.Board.makeMove(moveString);
-		this.updateNext();
+		Player nextPl = isWhiteNext() ? this.blackPlayer : this.whitePlayer;
+		this.setNextPlayer(nextPl);
+		this.Board.currentMove = nextPl == this.whitePlayer ? 'w' : 'b';
 		// TODO: update history (add move to history)
-		Move e = new Move(moveString, BackUp, player);
-		this.history.add(e);
+		//Move e = new Move(moveString, BackUp, player);
+		//this.history.add(e);
 		char c = player == this.blackPlayer ? 'w' : 'b';
 		if (this.rules.GameOver(this.Board, c, BackUp)) {
 			this.finish(player);

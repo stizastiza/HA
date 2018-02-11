@@ -106,7 +106,7 @@ public class CannonBoard implements Serializable {
 		this.squares.get(this.toX)[this.toY].piece = previousPiece;
 		this.squares.get(this.fromX)[this.fromY].piece = null;
 		}
-		this.switchMove();
+		//this.switchMove();
 	}
 	public void makeMoveCity() {
 		BoardPiece City = new BoardPiece(Character.toUpperCase(this.currentMove));
