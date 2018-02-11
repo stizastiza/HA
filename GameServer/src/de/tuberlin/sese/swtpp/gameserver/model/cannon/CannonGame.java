@@ -19,11 +19,7 @@ public class CannonGame extends Game implements Serializable{
 	/** TODO ALLGEMEIN:
 	 * TODO: was bedeutet serialVersionUID ???
 	 * CannonGame.java: CannonGame Constructor, tryMove
-	 * CannonBoard.java: aus dem Konstruktor die Zeilen in den Kopf verschieben, 
-	 * CannonBoard.java: makeMove(), loadFEN()
-	 * Rules.java: getCannonFrontal/RetreatMoves(), GameOver()
-	 * jUnit Tests
-	 * mit dem Eclipse Plugin EMMA sich auskennen
+	GameOver()
 	 */
 	private static final long serialVersionUID = 5424778147226994452L;
 	
@@ -265,21 +261,18 @@ public class CannonGame extends Game implements Serializable{
 		if (!this.rules.MoveParser(this.Board, moveString, this.getMoveCount())) {
 			return false;
 		}
+		String BackUp = this.getBoard();
 		this.Board.makeMove(moveString);
 		// TODO: update history (add move to history)
+		Move e = new Move(moveString, BackUp, player);
 		this.history.add(e);
 		// TODO: set next player.
 		this.updateNext();
 		this.Board.switchMove();
-		// TODO: (!!!) wird uberpruft, ob das Spiel durch diesen Zug zum Ende ist
-		// (!!!): die Stadt wird geschlagen? hat der gegn. Spieler keine legale Moves mehr (sie konnen sich nicht bewegen/es gibt nichts zu bewegen)?
-		
-		if (this.rules.GameOver(this.Board)) {
+		char c = player == this.blackPlayer ? 'w' : 'b';
+		if (this.rules.GameOver(this.Board, c, BackUp)) {
 			this.finish(player);
 		}
-		
-		
-		
 		return true;
 	}
 	

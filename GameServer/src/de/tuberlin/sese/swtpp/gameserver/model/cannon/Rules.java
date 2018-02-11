@@ -527,9 +527,16 @@ public class Rules implements Serializable {
 		}
 		return kind;
 	}
-	//TODO:
-	public boolean GameOver(CannonBoard board, char Player) {
-		
+	
+	public boolean GameOver(CannonBoard board, char Player, String BackUp) {
+		if (BackUp.contains(""+Character.toUpperCase(Player)) && !board.boardFEN().contains(""+Character.toUpperCase(Player))) {
+			// Die Stadt ist seit dem letzten Schritt verloren:
+			return true;
+		}
+		if (this.getLegalMoves(board).isEmpty()) {
+			// Keine weitere Bewegungen sind moglich:
+			return true;
+		}
 		return false;
 	}
 	

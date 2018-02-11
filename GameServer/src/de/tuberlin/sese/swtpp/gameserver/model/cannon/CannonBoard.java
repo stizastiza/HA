@@ -205,7 +205,7 @@ public class CannonBoard implements Serializable {
 				char letter = line.charAt(cols-1); // for example (1): cols = 2, letter = 1 or w.
 				// if letter is a digit:
 				if (!(""+letter).matches("[wWbB]")) {
-					colsY = colsY + Integer.parseInt(""+letter);
+					colsY = colsY + Character.getNumericValue(letter);
 					continue;
 				}
 				char name = letter == 'w' ? 'w' : letter == 'W' ? 'W' : letter == 'b' ? 'b' : letter == 'B' ? 'B' : null;
