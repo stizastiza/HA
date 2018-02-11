@@ -60,7 +60,7 @@ public class CannonBoard implements Serializable {
 		this.pieces.add(newPiece);
 		this.squares.get(x)[y].piece = newPiece;
 	}
-		
+
 	public void makeMove(String MoveString) {
 		this.parseLocalString(MoveString);
 		if (this.cityMove) {
@@ -85,7 +85,6 @@ public class CannonBoard implements Serializable {
 		this.squares.get(this.fromX)[this.fromY].piece = null;
 		
 		}
-		//this.switchMove();
 	}
 	public void makeMoveCity() {
 		BoardPiece City = new BoardPiece(Character.toUpperCase(this.currentMove));
