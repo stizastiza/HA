@@ -247,9 +247,6 @@ public class CannonGame extends Game implements Serializable{
 	@Override
 	public boolean tryMove(String moveString, Player player) {
 		//game.status != finished // DO I HAVE ANY LEGAL MOVES?
-		if (this.getStatus().equals("Finished")) {
-			return false;
-		}
 		if (this.getNextPlayer() != player) {
 			return false;
 		}
@@ -262,7 +259,6 @@ public class CannonGame extends Game implements Serializable{
 		Player nextPl = isWhiteNext() ? this.blackPlayer : this.whitePlayer;
 		this.setNextPlayer(nextPl);
 		this.Board.currentMove = nextPl == this.whitePlayer ? 'w' : 'b';
-		// TODO: update history (add move to history)
 		//Move e = new Move(moveString, BackUp, player);
 		//this.history.add(e);
 		char c = player == this.blackPlayer ? 'w' : 'b';

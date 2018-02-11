@@ -111,15 +111,58 @@ public class TryMoveTest {
 		assertGameState("4W5/1w1w1w1w1w/1w1w1w1w1w/1w1w1w1w1w///b1b1b1b1b1/b1b1b1b1b1/b1b1b1b1b1/4B5",true,false,false);
 	}
 	@Test
-	public void CannonShoot() {
+	public void CannonShootFrontForward() {
 		startGame("4W5/1w1w1w1w1w/1w1w1w1w1w/1w1w1w1w1w///1bb1b1b1b1/b1b1b1b1b1/b1b1b1b1b1/4B5",true);
 		assertMove("b8-b3",true,true);
 		assertGameState("4W5/1w1w1w1w1w/1w1w1w1w1w/1w1w1w1w1w///2b1b1b1b1/b1b1b1b1b1/b1b1b1b1b1/4B5",false,false,false);
 	}
 	@Test
-	public void DiagonalMoveCannon() {
+	public void DiagonalFrontLeftMoveCannon() {
 		startGame("5W4/1w8/2w7/3w6///b1b1b1b1b1/b1b1b1b1b1/b1b1b1b1b1/3B6", true);
 		assertMove("b8-e5", true, true);
 		assertGameState("5W4//2w7/3w6/4w5//b1b1b1b1b1/b1b1b1b1b1/b1b1b1b1b1/3B6", false,false,false);
 	}
+	@Test
+	public void DiagonalFrontLeftMoveCannonBlocked() {
+		startGame("5W4/1w8/2w7/3w6/4b5//2b1b1b1b1/b1b1b1b1b1/b1b1b1b1b1/3B6", true);
+		assertMove("b8-e5", true, false);
+	}
+	@Test
+	public void DiagonalFrontLeftShootCannon() {
+		startGame("5W4/1w8/2w7/3w6//5b4/2b1b1b1b1/b1b1b1b1b1/b1b1b1b1b1/3B6", true);
+		assertMove("b8-f4", true, true);
+		assertGameState("5W4/1w8/2w7/3w6///2b1b1b1b1/b1b1b1b1b1/b1b1b1b1b1/3B6", false, false, false);
+	}
+	@Test
+	public void DiagonalFrontLeftShootCannonBlocked() {
+		startGame("5W4/1w8/2w7/3w6/4b5/5b4/31b1b1b1/b1b1b1b1b1/b1b1b1b1b1/3B6", true);
+		assertMove("b8-f4", true, false);
+	}
+	
+
+	@Test
+	public void DiagonalFrontRightMoveCannon() {
+		startGame("5W4/8w1/7w2/6w3///b1b1b1b1b1/b1b1b1b1b1/b1b1b1b1b1/3B6", true);
+		assertMove("i8-f5", true, true);
+		assertGameState("5W4//7w2/6w3/5w4//b1b1b1b1b1/b1b1b1b1b1/b1b1b1b1b1/3B6", false,false,false);
+	}
+	
+	@Test
+	public void DiagonalFrontRightMoveCannonBlocked() {
+		startGame("5W4/8w1/7w2/6w3/5b4//2b1b1b1b1/b1b1b1b1b1/b1b1b1b1b1/3B6", true);
+		assertMove("i8-f5", true, false);
+	}
+	@Test
+	public void DiagonalFrontRightShootCannon() {
+		startGame("5W4/8w1/7w2/6w3//4b5/2b1b1b1b1/b1b1b1b1b1/b1b1b1b1b1/3B6", true);
+		assertMove("i8-e4", true, true);
+		assertGameState("5W4/8w1/7w2/6w3///2b1b1b1b1/b1b1b1b1b1/b1b1b1b1b1/3B6", false, false, false);
+	}
+	@Test
+	public void DiagonalFrontRightShootCannonBlocked() {
+		startGame("5W4/8w1/7w2/6w3/5w4/4b5/2b1b1b1b1/b1b1b1b1b1/b1b1b1b1b1/3B6", true);
+		assertMove("i8-e4", true, false);
+	}
+	
+	
 }

@@ -77,7 +77,7 @@ public class Rules implements Serializable {
 		}
 		MoveTupel t = new MoveTupel(Positions[0], Character.getNumericValue(Positions[1]), Positions[3], Character.getNumericValue(Positions[4]));
 		for (MoveTupel k: this.getLegalMoves(board)) {
-			System.out.println(""+k.fromX+k.fromY+'-'+k.toX+k.toY);
+			//System.out.println(""+k.fromX+k.fromY+'-'+k.toX+k.toY);
 			if (k.equals(t)) {
 				return true;
 			}
@@ -578,24 +578,6 @@ public class Rules implements Serializable {
 		}
 		return false;
 	}
-	
-	// Coordination:
-	public boolean contains(int[] arr, int item) {
-		      for (int n : arr) {
-		         if (item == n) {
-		            return true;
-		         }
-		      }
-		      return false;
-		   }
-	 public boolean contains(char[] arr, char item) {
-		      for (char n : arr) {
-		         if (item == n) {
-		            return true;
-		         }
-		      }
-		      return false;
-		   }
 	 public char getKey(int value) {
 		 for (char i: this.letter.keySet()) {
 			 if (this.letter.get(i) == value) {
