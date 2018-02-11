@@ -19,6 +19,9 @@ public class CannonBoard implements Serializable {
 	List<BoardPiece> pieces;
 	// Squares of the board:
 	Map<Character, BoardSquare[]> squares;
+	char fromX, toX;
+	int fromY, toY;
+	boolean cityMove, cannonMove, cannonShoot;
 	
 	/**
 	 * Constructor
@@ -27,16 +30,20 @@ public class CannonBoard implements Serializable {
 	public CannonBoard() {
 		this.pieces = new LinkedList<BoardPiece>();
 		this.squares = new HashMap<Character, BoardSquare[]>();
-		this.squares.put('a', new BoardSquare[10]);
-		this.squares.put('b', new BoardSquare[10]);
-		this.squares.put('c', new BoardSquare[10]);
-		this.squares.put('d', new BoardSquare[10]);
-		this.squares.put('e', new BoardSquare[10]);
-		this.squares.put('f', new BoardSquare[10]);
-		this.squares.put('g', new BoardSquare[10]);
-		this.squares.put('h', new BoardSquare[10]);
-		this.squares.put('i', new BoardSquare[10]);
-		this.squares.put('j', new BoardSquare[10]);
+		for (char c: this.signs) {
+			this.squares.put(c, new BoardSquare[10]);
+		}
+		this.signMap = new HashMap<Character, Integer>();
+		signMap.put('a', 0);
+		signMap.put('b', 1);
+		signMap.put('c', 2);
+		signMap.put('d', 3);
+		signMap.put('e', 4);
+		signMap.put('f', 5);
+		signMap.put('g', 6);
+		signMap.put('h', 7);
+		signMap.put('i', 8);
+		signMap.put('j', 9);
 		// fill fileds: for example [a][0..9]
 		for (char keyVar: this.squares.keySet()) {
 			for (int j=0; j<=9; j++) {
@@ -78,20 +85,70 @@ public class CannonBoard implements Serializable {
 		}
 	}
 	
-	// TODO: ANPASSEN!!!! MOVE FUNCTION (!not limited!): kann man zB die Cannone nicht bewegen
-	public void makeMove(char fromX, int fromY, char toX, int toY, boolean capture) {
+	public void makeMove(String MoveString) {
+		this.parseLocalString(MoveString);
+		if (this.cityMove) {
+			this.makeMoveCity();
+			return;
+		}
+		else if (this.cannonMove) {
+			this.makeMoveCannon();
+			return;
+		}
+		else if (this.cannonShoot) {
+			this.cannonShoot();
+			return;
+		} else {
+		BoardPiece previousPiece = this.squares.get(this.fromX)[this.fromY].piece;
+		previousPiece.square = this.squares.get(this.toX)[this.toY];
 		
-		BoardPiece previousPiece = this.squares.get(fromX)[fromY].piece;
-		previousPiece.square = this.squares.get(toX)[toY];
-		
-		if(capture && this.squares.get(toX)[toY].piece != null) {
-			this.squares.get(toX)[toY].piece.square = null;
+		if(this.squares.get(this.toX)[this.toY].piece != null && this.squares.get(this.toX)[this.toY].piece.name != this.currentMove && this.squares.get(this.toX)[this.toY].piece.name != Character.toUpperCase(this.currentMove)) {
+			this.squares.get(this.toX)[this.toY].piece.square = null;
 		}
 		
-		this.squares.get(toX)[toY].piece = previousPiece;
-		this.squares.get(fromX)[fromY].piece = null;
-		
-		
+		this.squares.get(this.toX)[this.toY].piece = previousPiece;
+		this.squares.get(this.fromX)[this.fromY].piece = null;
+		}
+	}
+	public void makeMoveCity() {
+		BoardPiece City = new BoardPiece(Character.toUpperCase(this.currentMove));
+		this.squares.get(this.toX)[this.toY].piece = City;
+		City.square = this.squares.get(this.toX)[this.toY];
+	}
+	public void makeMoveCannon() {
+		BoardPiece CannonLeader = this.squares.get(this.fromX)[this.fromY].piece;
+		CannonLeader.square = this.squares.get(this.toX)[this.toY];
+		this.squares.get(this.toX)[this.toY].piece = CannonLeader; 
+		this.squares.get(this.fromX)[this.fromY].piece = null;
+	}
+	public void cannonShoot() {
+		BoardPiece previousPiece = this.squares.get(this.toX)[this.toY].piece;
+		previousPiece.square = null;
+		this.squares.get(this.toX)[this.toY].piece = null;
+	}
+	
+	public void parseLocalString(String MoveString) {
+		char [] Positions = new char[5];
+		MoveString.getChars(0, MoveString.length(), Positions, 0);
+		this.fromX = Positions[0];
+		this.fromY = Character.getNumericValue(Positions[1]);
+		this.toX = Positions[3];
+		this.toY = Character.getNumericValue(Positions[4]);
+		this.cityMove = this.fromX == this.toX && this.fromY == this.toY ? true : false;
+		this.cannonMove = this.difference(this.signMap.get(this.fromX), this.signMap.get(this.toX)) == 3 || this.difference(fromY, toY) == 3 ? true : false;
+		this.cannonShoot = this.difference(this.signMap.get(this.fromX), this.signMap.get(this.toX)) > 3 || this.difference(fromY, toY) > 3 ? true : false;
+	}
+	
+	public int difference(int k, int m) {
+		if (k>m) {
+			return k-m;
+		}
+		else if (m>k) {
+			return m-k;
+		}
+		else {
+			return 0;
+		}
 	}
 	
 	/**
@@ -175,7 +232,14 @@ public class CannonBoard implements Serializable {
 		this.pieces = new LinkedList<BoardPiece>();
 	}
 	
-	
+	 public char getKey(int value) {
+		 for (char i: this.signMap.keySet()) {
+			 if (this.signMap.get(i) == value) {
+				 return i;
+			 }
+		 }
+		 return '0';
+	 }
 	
 	
 	

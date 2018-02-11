@@ -77,9 +77,9 @@ public class Rules implements Serializable {
 			return false;
 		}
 		this.fromX = Positions[0];
-		this.fromY = Positions[1];
+		this.fromY = Character.getNumericValue(Positions[1]);
 		this.toX = Positions[3];
-		this.toY = Positions[4];
+		this.toY = Character.getNumericValue(Positions[4]);
 		return true;
 	}
 	
@@ -125,7 +125,7 @@ public class Rules implements Serializable {
 		}
 		return result; 
 	}
-	//TODO: + Cannonen!
+	
 	public List<MoveTupel> constructPossibleMoves(CannonBoard board, BoardPiece p, int mod) {
 		List<MoveTupel> possibleMoves = new LinkedList<MoveTupel>();
 		possibleMoves.addAll(this.getFrontalMoves(board, p, mod));
@@ -529,10 +529,11 @@ public class Rules implements Serializable {
 	}
 	//TODO:
 	public boolean GameOver(CannonBoard board, char Player) {
+		
 		return false;
 	}
 	//TODO:
-	public boolean FigureCheck() {
+	public boolean FigureCheck(CannonBoard board, BoardPiece p, int mod) {
 		return false;
 	}
 	
