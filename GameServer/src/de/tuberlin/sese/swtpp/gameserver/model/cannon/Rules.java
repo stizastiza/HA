@@ -84,16 +84,6 @@ public class Rules implements Serializable {
 		return false;
 	}
 	
-	public boolean Capture(CannonBoard board, char toX, int toY) {
-		boolean result = false;
-		if (board.currentMove == 'w') {
-			result = board.squares.get(toX)[toY].piece.name == 'b' ? true : false;
-		} else {
-			result = board.squares.get(toX)[toY].piece.name == 'w' ? true : false;
-		}
-		return result;
-	}
-	
 	public boolean isSoldier(CannonBoard board, char fromX, int fromY) {
 		//(1):
 		if (board.squares.get(fromX)[fromY].piece == null) {
@@ -153,6 +143,7 @@ public class Rules implements Serializable {
 	}
 	public List<MoveTupel> getFrontalMoves(CannonBoard board, BoardPiece p, int mod) {
 		List<MoveTupel> possibleMoves = new LinkedList<MoveTupel>();
+		if (p != null && this.PositionExists(p.square.x, p.square.y)) {
 		char x = p.square.x;
 		int y = p.square.y;
 		/*(1)*/ char position1x = this.getKey(this.letter.get(x)-mod);
@@ -173,6 +164,7 @@ public class Rules implements Serializable {
 					MoveTupel c = new MoveTupel(x, y, position3x, position3y);
 					possibleMoves.add(c);
 				}
+		}
 		return possibleMoves;
 	}
 	public boolean PositionExists(char x, int y) {
