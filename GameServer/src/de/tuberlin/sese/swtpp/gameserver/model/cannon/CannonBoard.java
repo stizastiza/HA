@@ -170,7 +170,7 @@ public class CannonBoard implements Serializable {
 				}	
 			}
 			if (emptyCounter != 0) {
-				FEN += emptyCounter;
+				FEN = emptyCounter < 10 ? FEN+emptyCounter : FEN;
 				emptyCounter = 0;
 			}
 			if (num != 0) {

@@ -71,6 +71,19 @@ public class TryMoveTest {
 		assertMove("h6-h5",true,true);
 		assertGameState("5W4/1w1w1w1w1w/1w1w1w1w1w/1w3w3w/2w4w2/5b4/b1b3b1b1/b1b1b1b1b1/b1b1b1b1b1/3B6",false,false,false);
 	}
+	@Test
+	public void firstTest() {
+		startGame("/1w1w1w1w1w/1w1w1w1w1w/1w1w1w1w1w///b1b1b1b1b1/b1b1b1b1b1/b1b1b1b1b1/",true);
+		assertMove("a9-a9",true,false);
+		assertMove("a8-a8",true,true);
+		assertGameState("1W8/1w1w1w1w1w/1w1w1w1w1w/1w1w1w1w1w///b1b1b1b1b1/b1b1b1b1b1/b1b1b1b1b1/", false,false,false);
+	}
+	@Test
+	public void secondTest() {
+		startGame("1W8/1w1w1w1w1w/1w1w1w1w1w/1w1w1w1w1w///b1b1b1b1b1/b1b1b1b1b1/b1b1b1b1b1/8B1",true);
+		assertMove("f6-f5",true,true);
+		assertGameState("1W8/1w1w1w1w1w/1w1w1w1w1w/1w1w3w1w/5w4//b1b1b1b1b1/b1b1b1b1b1/b1b1b1b1b1/8B1",false,false,false);
+	}
 
 	//TODO: implement test cases of same kind as example here
 	public void winWhiteTest() {
