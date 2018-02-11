@@ -252,17 +252,19 @@ public class TryMoveTest {
 		assertMove("i8-e4", true, false);
 	}
 	
+	// Diagonal left back shoot and diagonal right back shoot
+	
 
-	public void sideMoveCannon() {
-		startGame("5W4/1w8/1w8/1w8///b1b1b1b1b1/b1b1b1b1b1/b1b1b1b1b1/3B6", true);
-		assertMove("b8-b5", true, true);
-		assertGameState("5W4//1w8/1w8/1w8//b1b1b1b1b1/b1b1b1b1b1/b1b1b1b1b1/3B6", false,false,false);
+	public void sideMoveCannonRight() {
+		startGame("5W4/3www4/////b1b1b1b1b1/b1b1b1b1b1/b1b1b1b1b1/3B6", true);
+		assertMove("d8-g8", true, true);
+		assertGameState("5W4/4www3/////b1b1b1b1b1/b1b1b1b1b1/b1b1b1b1b1/3B6", false,false,false);
 	}
 	@Test
-	public void sideMoveCannon2() {
-		startGame("5W4//1w8/1w8/1w8//b1b1b1b1b1/b1b1b1b1b1/b1b1b1b1b1/3B6", true);
-		assertMove("b5-b8", true, true);
-		assertGameState("5W4/1w8/1w8/1w8///b1b1b1b1b1/b1b1b1b1b1/b1b1b1b1b1/3B6", false,false,false);
+	public void sideMoveCannonLeft() {
+		startGame("5W4/3www4/////b1b1b1b1b1/b1b1b1b1b1/b1b1b1b1b1/3B6", true);
+		assertMove("f8-c8", true, true);
+		assertGameState("5W4/2www5/////b1b1b1b1b1/b1b1b1b1b1/b1b1b1b1b1/3B6", false,false,false);
 	}
 	@Test
 	public void sideShootCannon() {
