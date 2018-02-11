@@ -97,14 +97,17 @@ public class CannonBoard implements Serializable {
 			this.cannonShoot();
 		} else {
 		BoardPiece previousPiece = this.squares.get(this.fromX)[this.fromY].piece;
+		BoardPiece targetPiece = this.squares.get(this.toX)[this.toY].piece;
+		
+		
+		if(targetPiece != null && targetPiece.name != this.currentMove && targetPiece.name != Character.toUpperCase(this.currentMove)) {
+			targetPiece.square = null;
+			this.pieces.remove(targetPiece);		
+			}
 		previousPiece.square = this.squares.get(this.toX)[this.toY];
-		
-		if(this.squares.get(this.toX)[this.toY].piece != null && this.squares.get(this.toX)[this.toY].piece.name != this.currentMove && this.squares.get(this.toX)[this.toY].piece.name != Character.toUpperCase(this.currentMove)) {
-			this.squares.get(this.toX)[this.toY].piece.square = null;
-		}
-		
 		this.squares.get(this.toX)[this.toY].piece = previousPiece;
 		this.squares.get(this.fromX)[this.fromY].piece = null;
+		
 		}
 		//this.switchMove();
 	}

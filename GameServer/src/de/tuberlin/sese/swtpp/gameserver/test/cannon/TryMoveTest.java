@@ -104,6 +104,18 @@ public class TryMoveTest {
 		assertMove("b8-b5",true,true);
 		assertGameState("4W5/3w1w1w1w/1w1w1w1w1w/1w1w1w1w1w/1w8//b1b1b1b1b1/b1b1b1b1b1/b1b1b1b1b1/4B5",false,false,false);
 	}
+	@Test
+	public void CannonShootFalse() {
+		startGame("4W5/1w1w1w1w1w/1w1w1w1w1w/1w1w1w1w1w///b1b1b1b1b1/b1b1b1b1b1/b1b1b1b1b1/4B5",true);
+		assertMove("b8-b3",true,false);
+		assertGameState("4W5/1w1w1w1w1w/1w1w1w1w1w/1w1w1w1w1w///b1b1b1b1b1/b1b1b1b1b1/b1b1b1b1b1/4B5",true,false,false);
+	}
+	@Test
+	public void CannonShoot() {
+		startGame("4W5/1w1w1w1w1w/1w1w1w1w1w/1w1w1w1w1w///1bb1b1b1b1/b1b1b1b1b1/b1b1b1b1b1/4B5",true);
+		assertMove("b8-b3",true,true);
+		assertGameState("4W5/1w1w1w1w1w/1w1w1w1w1w/1w1w1w1w1w///2b1b1b1b1/b1b1b1b1b1/b1b1b1b1b1/4B5",false,false,false);
+	}
 
 	//TODO: implement test cases of same kind as example here
 	public void winWhiteTest() {
